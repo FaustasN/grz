@@ -1,0 +1,232 @@
+{
+  "header": {
+    "call": "Skambinti"
+  },
+  "hero": {
+    "title": "Kitas požiūris į automobilių remontą",
+    "subtitle": "Greitas, kokybiškas ir patikimas aptarnavimas kiekvienam klientui",
+    "bookTime": "Rezervuoti laiką",
+    "phone": "+370 624 44 062", 
+    "findUs": "Kaip mus rasti"
+  },
+  "about": {
+    "title": "Variklio sala - Jūsų automobilis, mūsų rūpestis",
+    
+    "features": {
+      "experience": {
+        "title": "Patirtis",
+        "description": "Ilgalaikė patirtis padangų montavimo ir ratų balansavimo srityje"
+      },
+      "professionalism": {
+        "title": "Profesionalumas",
+        "description": "Kvalifikuoti specialistai, nuolat tobulinantys savo įgūdžius"
+      },
+      "speed": {
+        "title": "Greitis",
+        "description": "Spartus ir kokybiškas aptarnavimas"
+      }
+    }
+  },
+  "services": {
+    "title": "Teikiamos paslaugos",
+    "subtitle": "Pilnas spektras padangų ir ratų priežiūros paslaugų jūsų automobiliui",
+    "galleryButton": "Darbų galerija",
+    "list": {
+      "tireInstallation": {
+        "title": "Padangų montavimas",
+        "description": "Profesionalus padangų keitimas ir montavimas visiems automobiliams",
+        "features": ["Vasarinės padangos", "Žieminės padangos", "Skirtingų pločių padangos"]
+      },
+      "wheelBalancing": {
+        "title": "Ratų balansavimas",
+        "description": "Tikslus ratų balansavimas su šiuolaikiška įranga",
+        "features": ["Kompiuterinis balansavimas", "Svarelių montavimas", "Testas kelyje"]
+      },
+      "wheelAlignment": {
+        "title": "Ratų suvedimas",
+        "description": "Tikslus dviejų ašių automobilių 3D ratų suvedimas su šiuolaikiška įranga",
+        "features": ["3D geometrija", "Visos markes", "Elektroninė ataskaita"]
+      },
+      "otherServices": {
+        "title": "Kitos paslaugos",
+        "description": "Automobilio paruošimas techninei apžiūrai",
+        "description2": "Nesate užtikrintas? Skambinkite mums arba registruokites vizitui pas mūsu specialistus",
+        "features": ["Automobilio būklės įvertinimas", "Techninės priežiūros planas"],
+        "additionalServices": [
+          {
+           
+            "features": ["Variklio ir techninės priežiūros darbai", "Stabdžių sistemos remontas", "Važiuoklės ir pakabos remontas", "Diagnostika" ]
+          }
+        ]
+      }
+    }
+  },
+  "contact": {
+    "title": "Kontaktai",
+    "subtitle": "Susisiekite su mumis telefonu arba atvykite į mūsų servisą",
+    "info": {
+      "phone": "Telefonas",
+      "email": "El. paštas",
+      "address": "Adresas",
+      "hours": "Darbo laikas"
+    },
+    "hours": {
+      "weekdays": "Pr-Pt: 10:00-20:00, Še: 9:00-15:00"
+    }
+  },
+  "footer": {
+    "description": "Profesionalios padangų paslaugos jūsų automobiliui",
+    "links": {
+      "about": "Apie mus",
+      "services": "Paslaugos",
+      "contact": "Kontaktai",
+      "info": "Rekvizitai",
+      "title": "Nuorodos"
+    },
+    "contact": {
+      "title": "Kontaktai",
+      "phone": "Tel: +370 624 44 062",
+      "email": "El. paštas: varikliosala@gmail.com",
+      "address": "Kalno g. 83, Melekonių k, 14119 Melekonys"
+    },
+    "rights": "Visos teisės saugomos"
+  },
+  "common": {
+    "loading": "Kraunama...",
+    "error": "Įvyko klaida",
+    "success": "Sėkmingai išsaugota"
+  },
+  "reservation": {
+    "title": "Rezervacija",
+    "service": "Paslauga",
+    "date": "Data",
+    "time": "Laikas",
+    "contact": "Kontaktai",
+    "selectDate": "Pasirinkite datą",
+    "selectTime": "Pasirinkite laiką",
+    "selectService": "Pasirinkite paslaugą",
+    "nameRequired": "Vardas yra privalomas",
+    "nameMinLength": "Vardas turi būti bent 3 simbolių",
+    "nameInvalid": "Vardas turi turėti tik raidžių ir tarpų",
+    "emailRequired": "El. paštas yra privalomas",
+    "emailInvalid": "El. paštas turi būti formatu example@example.com",
+    "emailFormat": "El. paštas turi būti formatu example@example.com",
+    "email": "El. paštas",
+    "phoneRequired": "Telefonas yra privalomas",
+    "phoneInvalid": "Telefonas turi būti formatu +370 600 00000 arba 0 600 00000",
+    "phoneFormat": "Telefonas turi būti formatu +370 600 00000 arba 0 600 00000",
+    "selectServiceRequired": "Pasirinkite paslaugą",
+    "selectDateRequired": "Pasirinkite datą",
+    "error": "Įvyko klaida",
+    "errorConnectingToServer": "Nepavyko prisijungti prie serverio. Prašome pabandyti vėliau.",
+    "success": "Rezervacija sėkmingai išsaugota",
+    "details": "Rezervacijos detalės",
+    "close": "Uždaryti",
+    "back": "Atgal",
+    "submit": "Pateikti",
+    "submitting": "Pateikiama...",
+    "wheels": "Ratai",
+    "mounting": "Montavimas",
+    "otherServices": "Kitos paslaugos",
+    "optional": "Neprivaloma",
+    "next": "Toliau",
+    "phone": "Telefonas",
+    "additionalInfo": "Papildoma informacija",
+    "additionalInfoPlaceholder": "Papildoma informacija",
+    "additionalInfoRequired": "Papildoma informacija yra privaloma",
+    "additionalInfoInvalid": "Papildoma informacija turi turėti tik raidžių ir tarpų",
+    "additionalInfoFormat": "Papildoma informacija turi turėti tik raidžių ir tarpų",
+    "checkingTimes": "Tikrinami galimi laikai...",
+    "timesReserved": "Rezervuoti laikai pažymėti pilka spalva",
+    "timeAlreadyReserved": "Šis laikas jau rezervuotas šiai paslaugai. Prašome pasirinkti kitą laiką.",
+    "selectedTime": "Pasirinktas laikas",
+    "selectedService": "Pasirinkta paslauga",
+    "selectedDate": "Pasirinkta data",
+    "namePlaceholder": "Įveskite savo vardą",
+    "name": "Vardas",
+    "hour": "Valanda",
+    "minute": "Minutė",
+    "booked": "Rezervuota"
+  },
+  "datePicker": {
+    "january": "Sausis",
+    "february": "Vasaris",
+    "march": "Kovas",
+    "april": "Balandis",
+    "may": "Gegužė",
+    "june": "Birželis",
+    "july": "Liepa",
+    "august": "Rugpjūtis",
+    "september": "Rugsėjis",
+    "october": "Spalis",
+    "november": "Lapkritis",
+    "december": "Gruodis",
+    "sunday": "S",
+    "monday": "P",
+    "tuesday": "A",
+    "wednesday": "T",
+    "thursday": "K",
+    "friday": "Š",
+    "saturday": "S"
+  },
+  "gallery": {
+    "title": "Darbų galerija",
+    "subtitle": "Mūsų atliktų darbų nuotraukos - prieš ir po",
+    "loading": "Kraunamos nuotraukos...",
+    "noPhotos": "Nuotraukų nėra",
+    "noPhotosDescription": "Nuotraukos bus rodomos čia",
+    "before": "Prieš",
+    "after": "Po"
+  },
+  "privacy": {
+    "title": "Privatumo politika",
+    "compactText": "Šioje svetainėje naudojame slapukus ir renkame asmeninius duomenis. Naudodamiesi mūsų svetaine, sutinkate su privatumo politika.",
+    "more": "Daugiau",
+    "accept": "Gerai",
+    "readAndAccept": "Perskaičiau ir susipažinau",
+    "close": "Uždaryti",
+    "sections": [
+      {
+        "title": "1. Duomenų valdytojas",
+        "items": [
+          "El. paštas: varikliosala@gmail.com",
+          "Telefonas: +370 624 44 062",
+          "Adresas: Kalno g. 83, Melekonių k, 14119 Melekonys"
+        ]
+      },
+      {
+        "title": "2. Renkami duomenys",
+        "items": [
+          "Vardas ir pavardė",
+          "Telefono numeris",
+          "El. pašto adresas",
+          "Rezervacijos data ir laikas",
+          "Paslaugos tipas"
+        ]
+      },
+      {
+        "title": "3. Duomenų naudojimo paskirtis",
+        "items": [
+          "Rezervacijų sukūrimas ir valdymas",
+          "Susisiekimas dėl rezervacijų",
+          "Paslaugų teikimas",
+          "El. laiškų siuntimas administratoriams"
+        ]
+      },
+      {
+        "title": "4. Duomenų saugojimas",
+        "items": [
+          "Rezervacijos automatiškai ištrinamos po paslaugos teikimo",
+          "Senos rezervacijos automatiškai ištrinamos, kai data praeina"
+        ]
+      },
+      {
+        "title": "5. Duomenų perdavimas",
+        "items": [
+          "Duomenys neperkeliami trečiosioms šalims",
+          "Naudojame Gmail paslaugas tik el. laiškų siuntimui"
+        ]
+      }
+    ]
+  }
+}

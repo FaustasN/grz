@@ -1,0 +1,232 @@
+{
+  "header": {
+    "call": "Call"
+  },
+  "hero": {
+    "title": "New perspective on car repair",
+    "subtitle": "Fast, quality and reliable service for every customer",
+    "bookTime": "Book Appointment",
+    "phone": "+370 624 44 062",
+    "findUs": "Find Us"
+  },
+  "about": {
+    "title": "Variklio sala - Your car, our care",
+   
+    "features": {
+      "experience": {
+        "title": "Experience",
+        "description": "Long-term experience in tire installation and wheel balancing"
+      },
+      "professionalism": {
+        "title": "Professionalism",
+        "description": "Qualified specialists continuously improving their skills"
+      },
+      "speed": {
+        "title": "Speed",
+        "description": "Fast and quality service"
+      }
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Full range of tire and wheel maintenance services for your vehicle",
+    "galleryButton": "Work Gallery",
+    "list": {
+      "tireInstallation": {
+        "title": "Tire Installation",
+        "description": "Professional tire replacement and installation for all vehicles",
+        "features": ["Summer tires", "Winter tires", "Different width tires"]
+      },
+      "wheelBalancing": {
+        "title": "Wheel Balancing",
+        "description": "Precise wheel balancing with modern equipment",
+        "features": ["Computer balancing", "Weight installation", "Road test"]
+      },
+      "wheelAlignment": {
+        "title": "Wheel Alignment",
+        "description": "Precise 3D wheel alignment for two-axle vehicles with modern equipment",
+        "features": ["3D geometry", "All brands", "Electronic report"]
+      },
+      "otherServices": {
+        "title": "Other Services",
+        "description": "Vehicle preparation for technical inspection",
+        "description2": "Not sure? Call us or register for a visit to our specialists",
+        "features": ["Vehicle condition assessment", "Maintenance plan"],
+        "additionalServices": [
+          {
+           
+            "features": ["Engine and technical maintenance", "Brake system repair", "Drivetrain and suspension repair", "Diagnosis" ]
+          }
+        ]
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Contact us by phone or visit our service center",
+    "info": {
+      "phone": "Phone",
+      "email": "Email",
+      "address": "Address",
+      "hours": "Working Hours"
+    },
+    "hours": {
+      "weekdays": "Mon-Fri: 10:00-20:00, Sat: 9:00-15:00"
+    }
+  },
+  "footer": {
+    "description": "Professional tire services for your vehicle",
+    "links": {
+      "about": "About Us",
+      "services": "Services",
+      "contact": "Contact",
+      "info": "Company Info",
+      "title": "Links"
+    },
+    "contact": {
+      "title": "Contact",
+      "phone": "Tel: +370 624 44 062",
+      "email": "Email: varikliosala@gmail.com",
+      "address": "Kalno g. 83, Melekonių k, 14119 Melekonys"
+    },
+    "rights": "All rights reserved"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Successfully saved"
+  },
+  "reservation": {
+    "title": "Reservation",
+    "service": "Service",
+    "date": "Date",
+    "time": "Time",
+    "contact": "Contact",
+    "selectDate": "Select Date",
+    "selectTime": "Select Time",
+    "selectService": "Select Service",
+    "nameRequired": "Name is required",
+    "nameMinLength": "Name must be at least 3 characters",
+    "nameInvalid": "Name must contain only letters, spaces, and hyphens",
+    "emailRequired": "Email is required",
+    "email": "Email",
+    "emailInvalid": "Email must be in the format example@example.com",
+    "emailFormat": "Email must be in the format example@example.com",
+    "phoneRequired": "Phone is required",
+    "phoneInvalid": "Phone must be in the format +370 600 00000 or 0 600 00000",
+    "phoneFormat": "Phone must be in the format +370 600 00000 or 0 600 00000",
+    "selectServiceRequired": "Please select a service",
+    "selectDateRequired": "Please select a date",
+    "error": "An error occurred",
+    "errorConnectingToServer": "Failed to connect to server. Please try again later.",
+    "success": "Reservation successfully saved",
+    "details": "Reservation details",
+    "close": "Close",
+    "back": "Back",
+    "submit": "Submit",
+    "submitting": "Submitting...",
+    "wheels": "Wheels",
+    "mounting": "Mounting",
+    "otherServices": "Other Services",
+    "optional": "Optional",
+    "next": "Next",
+    "phone": "Phone",
+    "additionalInfo": "Additional Information",
+    "additionalInfoPlaceholder": "Additional information",
+    "additionalInfoRequired": "Additional information is required",
+    "additionalInfoInvalid": "Additional information must contain only letters, spaces, and hyphens",
+    "additionalInfoFormat": "Additional information must contain only letters, spaces, and hyphens",
+    "checkingTimes": "Checking for available times...",
+      "timesReserved": "Reserved times are marked in gray",
+    "timeAlreadyReserved": "This time slot is already reserved for this service. Please select another time.",
+    "selectedTime": "Selected Time",
+    "selectedService": "Selected Service",
+    "selectedDate": "Selected Date",
+    "namePlaceholder": "Enter your name",
+    "name": "Name",
+    "hour": "Hour",
+    "minute": "Minute",
+    "booked": "Booked"
+  },
+  "datePicker": {
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "may": "May",
+    "june": "June",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "october": "October",
+    "november": "November",
+    "december": "December",
+    "sunday": "S",
+    "monday": "M",
+    "tuesday": "T",
+    "wednesday": "W",
+    "thursday": "T",
+    "friday": "F",
+    "saturday": "S"
+  },
+  "gallery": {
+    "title": "Work Gallery",
+    "subtitle": "Photos of our work - before and after",
+    "loading": "Loading photos...",
+    "noPhotos": "No photos",
+    "noPhotosDescription": "Photos will be displayed here",
+    "before": "Before",
+    "after": "After"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "compactText": "This website uses cookies and collects personal data. By using our website, you agree to the privacy policy.",
+    "more": "More",
+    "accept": "OK",
+    "readAndAccept": "I have read and understood",
+    "close": "Close",
+    "sections": [
+      {
+        "title": "1. Data Controller",
+        "items": [  
+          "Email: varikliosala@gmail.com",
+          "Phone: +370 624 44 062",
+          "Address: Kalno g. 83, Melekonių k, 14119 Melekonys"
+        ]
+      },
+      {
+        "title": "2. Collected Data",
+        "items": [
+          "Name and surname",
+          "Phone number",
+          "Email address",
+          "Reservation date and time",
+          "Service type"
+        ]
+      },
+      {
+        "title": "3. Purpose of Data Use",
+        "items": [
+          "Creating and managing reservations",
+          "Contact regarding reservations",
+          "Providing services",
+          "Sending emails to administrators"
+        ]
+      },
+      {
+        "title": "4. Data Storage",
+        "items": [
+          "Reservations are automatically deleted after service provision",
+          "Old reservations are automatically deleted when the date passes"
+        ]
+      },
+      {
+        "title": "5. Data Transfer",
+        "items": [
+          "Data is not transferred to third parties",
+          "We use Gmail services only for sending emails"
+        ]
+      }
+    ]
+  }
+}
