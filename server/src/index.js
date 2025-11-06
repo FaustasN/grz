@@ -10,6 +10,114 @@ import { dirname, join } from 'path';
 import rateLimit from 'express-rate-limit';
 import fs from 'fs';
 dotenv.config();
+
+const VILNIUS_TIME_ZONE = 'Europe/Vilnius';
+
+// Nustatyti laiko zoną į Europa/Vilnius
+process.env.TZ = VILNIUS_TIME_ZONE;
+
+const VILNIUS_DATETIME_FORMATTER = new Intl.DateTimeFormat('en-GB', {
+  timeZone: VILNIUS_TIME_ZONE,
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  hour12: false
+});
+
+function getVilniusDateParts(date = new Date()) {
+  return VILNIUS_DATETIME_FORMATTER.formatToParts(date).reduce((acc, part) => {
+    if (part.type !== 'literal') {
+      acc[part.type] = part.value;
+    }
+    return acc;
+  }, {});
+}
+
+function createVilniusDate(date = new Date()) {
+  const parts = getVilniusDateParts(date);
+  return new Date(Date.UTC(
+    Number(parts.year),
+    Number(parts.month) - 1,
+    Number(parts.day),
+    Number(parts.hour),
+    Number(parts.minute),
+    Number(parts.second)
+  ));
+}
+
+function formatSQLiteDate(date) {
+  const year = date.getUTCFullYear();
+  const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(date.getUTCDate()).padStart(2, '0');
+  const hour = String(date.getUTCHours()).padStart(2, '0');
+  const minute = String(date.getUTCMinutes()).padStart(2, '0');
+  const second = String(date.getUTCSeconds()).padStart(2, '0');
+
+  return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
+}
+
+function addMinutes(date, minutes) {
+  return new Date(date.getTime() + minutes * 60 * 1000);
+}
+
+const REMINDER_WINDOW_MINUTES = Object.freeze({ min: 25, max: 35 });
+
+function getReminderWindow(now = new Date(), window = REMINDER_WINDOW_MINUTES) {
+  const baseDate = createVilniusDate(now);
+  const minDate = addMinutes(baseDate, window.min);
+  const maxDate = addMinutes(baseDate, window.max);
+
+  return {
+    minTime: formatSQLiteDate(minDate),
+    maxTime: formatSQLiteDate(maxDate)
+  };
+}
+
+// Helper funkcija, kuri grąžina Vilniaus laiką SQLite formatu (YYYY-MM-DD HH:MM:SS)
+function getVilniusTime() {
+  return formatSQLiteDate(createVilniusDate());
+}
+
+// Helper funkcija, kuri grąžina Vilniaus laiką su offset (minutėmis)
+function getVilniusTimeWithOffset(offsetMinutes) {
+  const baseDate = createVilniusDate();
+  const targetDate = addMinutes(baseDate, offsetMinutes);
+  return formatSQLiteDate(targetDate);
+}
+
+// TEMP DEBUG: log every reservation for troubleshooting reminder logic
+function logAllReservationsDebug() {
+  try {
+    const query = `
+      SELECT id, name, email, phone, reservation_date, service_type, reminder_sent
+      FROM reservations
+      ORDER BY reservation_date ASC
+    `;
+    const reservations = db.prepare(query).all();
+
+    console.log('📋 [DEBUG] Visų rezervacijų sąrašas:');
+    if (reservations.length === 0) {
+      console.log('📋 [DEBUG]   - Nėra įrašų rezervacijų lentelėje');
+      return;
+    }
+
+    for (const reservation of reservations) {
+      console.log(`📋 [DEBUG]   - #${reservation.id} | ${reservation.reservation_date} | ${reservation.service_type} | ${reservation.name} | reminder_sent=${reservation.reminder_sent}`);
+    }
+  } catch (error) {
+    if (error.message && error.message.includes('no such table')) {
+      console.warn('📋 [DEBUG] Lentelė "reservations" nerasta – praleidžiamas rezervacijų logavimas.');
+      return;
+    }
+
+    console.error('📋 [DEBUG] Klaida bandant išvesti visas rezervacijas:', error.message);
+    console.error('📋 [DEBUG] Visos klaidos detalės:', JSON.stringify(error, null, 2));
+  }
+}
+
 const saltRounds = 10;
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -23,6 +131,7 @@ const uploadsDir = join(__dirname, '..', 'uploads', 'photos');
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
 }
+
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
@@ -100,9 +209,10 @@ function cleanupOldReservations() {
       return;
     }
     
-    // Use SQLite's datetime('now') to match the stored format (YYYY-MM-DD HH:MM:SS)
-    const query = `DELETE FROM reservations WHERE reservation_date < datetime('now')`;
-    const result = db.prepare(query).run();
+    // Use Vilnius time to match the stored format (YYYY-MM-DD HH:MM:SS)
+    const currentVilniusTime = getVilniusTime();
+    const query = `DELETE FROM reservations WHERE reservation_date < ?`;
+    const result = db.prepare(query).run(currentVilniusTime);
     
     if (result.changes > 0) {
     }
@@ -118,116 +228,110 @@ cleanupOldReservations();
 setInterval(cleanupOldReservations, 86400000);
 
 // Function to send reminder emails 30 minutes before reservation
-async function sendReminderEmails() {
-  const currentTime = new Date().toISOString();
-  console.log(`\n📧 [DEBUG] sendReminderEmails funkcija paleista: ${currentTime}`);
-  
+async function sendReminderEmails(invocationDate = new Date()) {
+  const invocationIso = invocationDate.toISOString();
+  console.log(`\n📧 [DEBUG] sendReminderEmails funkcija paleista: ${invocationIso}`);
+
+  logAllReservationsDebug();
+
   try {
-    // Naudoti SQLite datetime funkcijas vietos laiko zonoje
-    // SQLite datetime('now', 'localtime') grąžina vietos laiką formatu YYYY-MM-DD HH:MM:SS
-    
-    // Apskaičiuoti laiko intervalą: nuo 25 minučių iki 35 minučių nuo dabar
-    // Tai užtikrina, kad priminimas bus išsiųstas per 30 minučių (+-5 min paklaida)
-    const minTimeOffset = 25; // minutės
-    const maxTimeOffset = 35; // minutės
-    
-    console.log(`📧 [DEBUG] Ieškoma rezervacijų, kurios prasideda per ${minTimeOffset}-${maxTimeOffset} minučių`);
-    
-    // Rasti rezervacijas, kurios prasideda per 25-35 minučių
-    // ir dar nebuvo išsiųstas priminimas
-    // Naudojame datetime() funkciją abiem pusėms, kad palyginimas būtų teisingas
-    const query = 'SELECT id, name, email, phone, reservation_date, service_type ' +
-      'FROM reservations ' +
-      'WHERE datetime(reservation_date) >= datetime(\'now\', \'localtime\', \'+\' || ' + minTimeOffset + ' || \' minutes\') ' +
-      'AND datetime(reservation_date) <= datetime(\'now\', \'localtime\', \'+\' || ' + maxTimeOffset + ' || \' minutes\') ' +
-      'AND (reminder_sent IS NULL OR reminder_sent = 0)';
-    
-    console.log(`📧 [DEBUG] SQL užklausa: ${query}`);
-    
-    const reservations = db.prepare(query).all();
-    
-    console.log(`📧 [DEBUG] Rasta rezervacijų: ${reservations.length}`);
-    
-    if (reservations.length === 0) {
-      console.log(`📧 [DEBUG] Nėra rezervacijų, kurioms reikia siųsti priminimus`);
-      return; // Nėra ką siųsti
-    }
-    
-    // Debug: transporter konfigūracija
-    console.log(`📧 [DEBUG] Email transporter konfigūracija:`);
-    console.log(`📧 [DEBUG]   - Service: ${transporter.options?.service || transporter.transporter?.options?.service || 'N/A'}`);
-    console.log(`📧 [DEBUG]   - From: ${process.env.EMAIL_USER || 'NENUSTATYTA'}`);
-    console.log(`📧 [DEBUG]   - Pass configured: ${process.env.EMAIL_PASS ? 'TAIP' : 'NE'}`);
-    
-    for (const reservation of reservations) {
-      try {
-        console.log(`\n📧 [DEBUG] Siunčiamas priminimas rezervacijai #${reservation.id}:`);
-        console.log(`📧 [DEBUG]   - Vardas: ${reservation.name}`);
-        console.log(`📧 [DEBUG]   - Email: ${reservation.email}`);
-        console.log(`📧 [DEBUG]   - Telefonas: ${reservation.phone}`);
-        console.log(`📧 [DEBUG]   - Rezervacijos data: ${reservation.reservation_date}`);
-        console.log(`📧 [DEBUG]   - Paslauga: ${reservation.service_type}`);
-        
-        // Siųsti priminimą klientui
-        const emailResult = await transporter.sendMail({
-          from: process.env.EMAIL_USER,
-          to: reservation.email,
-          subject: `Priminimas: Jūsų paslauga už ${reservation.service_type} prasideda per 30 min`,
-          html: `
-            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-              <h2 style="color: #333;">Sveiki, ${reservation.name}!</h2>
-              <p>Primename, kad jūsų užsakytos paslaugos laikas artėja:</p>
-              <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin: 20px 0;">
-                <p style="margin: 5px 0;"><strong>Paslauga:</strong> ${reservation.service_type}</p>
-                <p style="margin: 5px 0;"><strong>Data ir laikas:</strong> ${reservation.reservation_date}</p>
-                <p style="margin: 5px 0;"><strong>Telefonas:</strong> ${reservation.phone}</p>
-              </div>
-              <p>Prašome atvykti laiku!</p>
-              <p style="margin-top: 30px;">Su pagarba,<br>Variklio Sala</p>
-            </div>
-          `,
-          text: `
-Sveiki, ${reservation.name}!
+    const { minTime, maxTime } = getReminderWindow(invocationDate);
 
-Primename, kad jūsų užsakytos paslaugos laikas artėja:
+    console.log(`📧 [DEBUG] Ieškoma rezervacijų, kurios prasideda per ${REMINDER_WINDOW_MINUTES.min}-${REMINDER_WINDOW_MINUTES.max} minučių`);
+    console.log(`📧 [DEBUG] Min laikas (Vilnius): ${minTime}`);
+    console.log(`📧 [DEBUG] Max laikas (Vilnius): ${maxTime}`);
 
-Paslauga: ${reservation.service_type}
-Data ir laikas: ${reservation.reservation_date}
-Telefonas: ${reservation.phone}
+    const reminderQuery = `
+      SELECT id, name, email, phone, reservation_date, service_type
+      FROM reservations
+      WHERE reservation_date >= ?
+        AND reservation_date <= ?
+        AND (reminder_sent IS NULL OR reminder_sent = 0)
+    `;
 
-Prašome atvykti laiku!
-
-Su pagarba,
-Variklio Sala
-          `
-        });
-        
-        console.log(`✅ [DEBUG] El. laiškas sėkmingai išsiųstas rezervacijai #${reservation.id}`);
-        console.log(`📧 [DEBUG]   - MessageId: ${emailResult.messageId}`);
-        console.log(`📧 [DEBUG]   - Response: ${emailResult.response || 'N/A'}`);
-        
-        // Pažymėti, kad priminimas išsiųstas
-        const updateResult = db.prepare('UPDATE reservations SET reminder_sent = 1 WHERE id = ?').run(reservation.id);
-        console.log(`📧 [DEBUG] Rezervacija #${reservation.id} pažymėta kaip išsiųstas priminimas (affected rows: ${updateResult.changes})`);
-        
-      } catch (emailError) {
-        console.error(`❌ [DEBUG] Klaida siunčiant priminimą ${reservation.email} (rezervacija #${reservation.id}):`, emailError.message);
-        console.error(`❌ [DEBUG] Klaidos tipas: ${emailError.name}`);
-        console.error(`❌ [DEBUG] Klaidos kodas: ${emailError.code || 'N/A'}`);
-        console.error(`❌ [DEBUG] Klaidos stack:`, emailError.stack);
-        console.error('❌ [DEBUG] Visos klaidos detalės:', JSON.stringify(emailError, null, 2));
-        // Tęsti su kitomis rezervacijomis net jei viena nepavyko
+    let reservations = [];
+    try {
+      reservations = db.prepare(reminderQuery).all(minTime, maxTime);
+    } catch (dbError) {
+      if (dbError.message && dbError.message.includes('no such table')) {
+        console.warn('📧 [DEBUG] Lentelė "reservations" dar nesukurta – priminimai praleidžiami.');
+        return;
       }
+      throw dbError;
     }
-    
-    console.log(`📧 [DEBUG] sendReminderEmails funkcija baigta: ${new Date().toISOString()}\n`);
-    
+
+    console.log(`📧 [DEBUG] Rasta rezervacijų: ${reservations.length}`);
+
+    if (reservations.length === 0) {
+      console.log('📧 [DEBUG] Nėra rezervacijų, kurioms reikia siųsti priminimus');
+      return;
+    }
+
+    for (const reservation of reservations) {
+      await processReservationReminder(reservation);
+    }
   } catch (error) {
-    console.error('❌ [DEBUG] Klaida sendReminderEmails funkcijoje:', error.message);
-    console.error('❌ [DEBUG] Klaidos tipas:', error.name);
-    console.error('❌ [DEBUG] Klaidos stack:', error.stack);
-    console.error('❌ [DEBUG] Visos klaidos detalės:', JSON.stringify(error, null, 2));
+    console.error('Klaida sendReminderEmails funkcijoje:', error.message);
   }
+}
+
+async function processReservationReminder(reservation) {
+  try {
+    const mailOptions = buildReminderMailOptions(reservation);
+    await transporter.sendMail(mailOptions);
+
+    try {
+      db.prepare('UPDATE reservations SET reminder_sent = 1 WHERE id = ?').run(reservation.id);
+    } catch (updateError) {
+        console.error(`Nepavyko pažymėti rezervacijos #${reservation.id} kaip išsiųsto priminimo:`, updateError.message);
+    }
+  } catch (emailError) {
+    console.error(`Klaida siunčiant priminimą ${reservation.email} (rezervacija #${reservation.id}):`, emailError.message);
+  }
+}
+
+function buildReminderMailOptions(reservation) {
+  const { html, text } = buildReminderEmailContent(reservation);
+  return {
+    from: process.env.EMAIL_USER,
+    to: reservation.email,
+    subject: `Priminimas: Jūsų paslaugos ${reservation.service_type} vizitas bus po 30 min`,
+    html,
+    text
+  };
+}
+
+function buildReminderEmailContent(reservation) {
+  const html = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+      <h2 style="color: #333;">Sveiki, ${reservation.name}!</h2>
+      <p>Primename, kad jūsų užsakytos paslaugos laikas artėja:</p>
+      <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin: 20px 0;">
+        <p style="margin: 5px 0;"><strong>Paslauga:</strong> ${reservation.service_type}</p>
+        <p style="margin: 5px 0;"><strong>Data ir laikas:</strong> ${reservation.reservation_date}</p>
+        <p style="margin: 5px 0;"><strong>Telefonas:</strong> ${reservation.phone}</p>
+      </div>
+      <p>Prašome atvykti laiku!</p>
+      <p style="margin-top: 30px;">Su pagarba,<br>Variklio Sala</p>
+    </div>
+  `.trim();
+
+  const text = [
+    `Sveiki, ${reservation.name}!`,
+    '',
+    'Primename, kad jūsų užsakytos paslaugos laikas artėja:',
+    '',
+    `Paslauga: ${reservation.service_type}`,
+    `Data ir laikas: ${reservation.reservation_date}`,
+    `Telefonas: ${reservation.phone}`,
+    '',
+    'Prašome atvykti laiku!',
+    '',
+    'Su pagarba,',
+    'Variklio Sala'
+  ].join('\n');
+
+  return { html, text };
 }
 
 // Paleisti priminimų funkciją kas 2 minutes (120000 ms)
@@ -235,11 +339,6 @@ setInterval(sendReminderEmails, 2 * 60 * 1000);
 
 // Paleisti iš karto paleidžiant serverį (patikrinti ar yra artėjančių rezervacijų)
 sendReminderEmails();
-
-// health status
-app.get('/health', (req, res) => {
-  res.status(200).json({ message: 'Serveris veikia' }); // leidzia curlinti ir testinti serveri
-});
 
 
 // Login endpoint with bcrypt 
@@ -295,8 +394,12 @@ app.post('/create-admin-user', async (req, res) => {// temp endpoint to create a
   db.prepare(query).run(username, password);
   res.status(200).json({ message: 'Admin user created', username: username, password: password });
 }); 
+app.post('/test-endpoint', async (req, res) => {// temp endpoint to test server
+  const query = `INSERT INTO reservations (name, email, phone, reservation_date, service_type, additional_info) VALUES (?, ?, ?, ?, ?, ?)`;
+  db.prepare(query).run("Jonas Jonaitis", "jonas@example.com", "061234567", "2025-11-07 00:45:00", "tire_alignment", "Papildoma informacija");
+  res.status(200).json({ message: 'Reservation created' });
+}); 
 
-// Photo upload endpoints
 app.post('/api/photos/before', authenticateToken, (req, res, next) => {
   upload.array('photos', 10)(req, res, (err) => {
     if (err) {
@@ -605,9 +708,10 @@ app.post('/api/reservations', async (req, res) => {
     
     const query = `
       INSERT INTO reservations (name, email, phone, reservation_date, service_type, additional_info, created_at, reminder_sent)
-      VALUES (?, ?, ?, ?, ?, ?, datetime('now'), 0)
+      VALUES (?, ?, ?, ?, ?, ?, ?, 0)
     `;
-    const values = [name, email, phone, reservation_date, service_type, additional_info || null];
+    const currentVilniusTime = getVilniusTime();
+    const values = [name, email, phone, reservation_date, service_type, additional_info || null, currentVilniusTime];
     
     const result = db.prepare(query).run(values);
     const inserted = db.prepare('SELECT * FROM reservations WHERE id = ?').get(result.lastInsertRowid);
@@ -691,5 +795,8 @@ app.use((error, req, res, next) => {
 
 // Start server
 app.listen(PORT, () => {
+  const vilniusTime = getVilniusTime();
   console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`🌍 Laiko zona: Europe/Vilnius`);
+  console.log(`🕐 Dabartinis Vilniaus laikas: ${vilniusTime}`);
 });
