@@ -78,6 +78,7 @@ app.use((req, res, next) => {
 });
 const transporter = nodemailer.createTransport({
   service: 'gmail',
+  secure: true,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
@@ -575,22 +576,22 @@ app.post('/api/reservations', async (req, res) => {
     const result = db.prepare(query).run(values);
     const inserted = db.prepare('SELECT * FROM reservations WHERE id = ?').get(result.lastInsertRowid);
     
-    // Send email notification
-    try {
-      await transporter.sendMail({
-        from: process.env.EMAIL_USER,
-        to: "noreikafaustas@gmail.com",
-        subject: `Nauja rezervacija: ${service_type}`,
-        text: `Nauja rezervacija:\n\nVardas: ${name}\nTelefonas: ${phone}\nData ir laikas: ${reservation_date}\nPaslauga: ${service_type}\nPapildoma informacija: ${additional_info || 'Nėra papildomos informacijos'}`
-      });
-    } catch (emailError) {
-      console.error('Error sending email notification:', emailError);
-      // Don't fail the reservation creation if email fails
-    }
+    // Send response immediately after database insert
     res.status(201).json({ 
       success: true, 
       message: 'Reservation created successfully',
       data: inserted
+    });
+    
+    // Send email notification asynchronously (don't wait for it)
+    transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: "noreikafaustas@gmail.com",
+      subject: `Nauja rezervacija: ${service_type}`,
+      text: `Nauja rezervacija:\n\nVardas: ${name}\nTelefonas: ${phone}\nData ir laikas: ${reservation_date}\nPaslauga: ${service_type}\nPapildoma informacija: ${additional_info || 'Nėra papildomos informacijos'}`
+    }).catch(emailError => {
+      console.error('Error sending email notification:', emailError);
+      // Email failure doesn't affect the reservation
     });
   } catch (error) {
     console.error('Error creating reservation:', error);
