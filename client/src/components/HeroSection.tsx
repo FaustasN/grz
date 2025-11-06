@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Phone, MapPin, Calendar } from 'lucide-react';
+import { Phone, MapPin, Calendar, Facebook } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import ReservationModal from './ReservationModal';
 
@@ -27,7 +27,7 @@ export default function HeroSection() {
               {t('hero.subtitle')}
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center pt-4 sm:pt-6 px-4">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 justify-center items-center pt-4 sm:pt-6 px-4">
               <button
                 onClick={() => setIsModalOpen(true)}
                 className="flex items-center gap-2 sm:gap-3 bg-white text-gray-800 px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:bg-gray-50 transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl text-base sm:text-lg font-semibold w-full sm:w-auto justify-center"
@@ -48,11 +48,24 @@ export default function HeroSection() {
 
               <a
                 href="https://share.google/tNkISjYTxfFL8kkVR"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-sm text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:bg-white/20 transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl text-base sm:text-lg font-semibold border border-white/30 w-full sm:w-auto justify-center"
               >
                 <MapPin size={20} className="sm:hidden" />
                 <MapPin size={24} className="hidden sm:block" />
                 <span>{t('hero.findUs')}</span>
+              </a>
+              
+              <a
+                href="https://www.facebook.com/p/Variklio-sala-61581165962744/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-sm text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:bg-white/20 transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl text-base sm:text-lg font-semibold border border-white/30 w-full sm:w-auto justify-center"
+              >
+                <Facebook size={20} className="sm:hidden" />
+                <Facebook size={24} className="hidden sm:block" />
+                <span>{t('hero.facebook')}</span>
               </a>
             </div>
           </div>

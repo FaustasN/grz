@@ -119,7 +119,9 @@ setInterval(cleanupOldReservations, 86400000);
 
 // Function to send reminder emails 30 minutes before reservation
 async function sendReminderEmails() {
-
+  const currentTime = new Date().toISOString();
+  console.log(`\n📧 [DEBUG] sendReminderEmails funkcija paleista: ${currentTime}`);
+  
   try {
     // Naudoti SQLite datetime funkcijas vietos laiko zonoje
     // SQLite datetime('now', 'localtime') grąžina vietos laiką formatu YYYY-MM-DD HH:MM:SS
@@ -128,6 +130,8 @@ async function sendReminderEmails() {
     // Tai užtikrina, kad priminimas bus išsiųstas per 30 minučių (+-5 min paklaida)
     const minTimeOffset = 25; // minutės
     const maxTimeOffset = 35; // minutės
+    
+    console.log(`📧 [DEBUG] Ieškoma rezervacijų, kurios prasideda per ${minTimeOffset}-${maxTimeOffset} minučių`);
     
     // Rasti rezervacijas, kurios prasideda per 25-35 minučių
     // ir dar nebuvo išsiųstas priminimas
@@ -138,16 +142,34 @@ async function sendReminderEmails() {
       'AND datetime(reservation_date) <= datetime(\'now\', \'localtime\', \'+\' || ' + maxTimeOffset + ' || \' minutes\') ' +
       'AND (reminder_sent IS NULL OR reminder_sent = 0)';
     
+    console.log(`📧 [DEBUG] SQL užklausa: ${query}`);
+    
     const reservations = db.prepare(query).all();
     
+    console.log(`📧 [DEBUG] Rasta rezervacijų: ${reservations.length}`);
+    
     if (reservations.length === 0) {
+      console.log(`📧 [DEBUG] Nėra rezervacijų, kurioms reikia siųsti priminimus`);
       return; // Nėra ką siųsti
     }
     
+    // Debug: transporter konfigūracija
+    console.log(`📧 [DEBUG] Email transporter konfigūracija:`);
+    console.log(`📧 [DEBUG]   - Service: ${transporter.options?.service || transporter.transporter?.options?.service || 'N/A'}`);
+    console.log(`📧 [DEBUG]   - From: ${process.env.EMAIL_USER || 'NENUSTATYTA'}`);
+    console.log(`📧 [DEBUG]   - Pass configured: ${process.env.EMAIL_PASS ? 'TAIP' : 'NE'}`);
+    
     for (const reservation of reservations) {
       try {
+        console.log(`\n📧 [DEBUG] Siunčiamas priminimas rezervacijai #${reservation.id}:`);
+        console.log(`📧 [DEBUG]   - Vardas: ${reservation.name}`);
+        console.log(`📧 [DEBUG]   - Email: ${reservation.email}`);
+        console.log(`📧 [DEBUG]   - Telefonas: ${reservation.phone}`);
+        console.log(`📧 [DEBUG]   - Rezervacijos data: ${reservation.reservation_date}`);
+        console.log(`📧 [DEBUG]   - Paslauga: ${reservation.service_type}`);
+        
         // Siųsti priminimą klientui
-        await transporter.sendMail({
+        const emailResult = await transporter.sendMail({
           from: process.env.EMAIL_USER,
           to: reservation.email,
           subject: `Priminimas: Jūsų paslauga už ${reservation.service_type} prasideda per 30 min`,
@@ -180,17 +202,31 @@ Variklio Sala
           `
         });
         
+        console.log(`✅ [DEBUG] El. laiškas sėkmingai išsiųstas rezervacijai #${reservation.id}`);
+        console.log(`📧 [DEBUG]   - MessageId: ${emailResult.messageId}`);
+        console.log(`📧 [DEBUG]   - Response: ${emailResult.response || 'N/A'}`);
+        
         // Pažymėti, kad priminimas išsiųstas
-        db.prepare('UPDATE reservations SET reminder_sent = 1 WHERE id = ?').run(reservation.id);
+        const updateResult = db.prepare('UPDATE reservations SET reminder_sent = 1 WHERE id = ?').run(reservation.id);
+        console.log(`📧 [DEBUG] Rezervacija #${reservation.id} pažymėta kaip išsiųstas priminimas (affected rows: ${updateResult.changes})`);
+        
       } catch (emailError) {
-        console.error(`❌ Klaida siunčiant priminimą ${reservation.email} (rezervacija #${reservation.id}):`, emailError.message);
-        console.error('Detalės:', emailError);
+        console.error(`❌ [DEBUG] Klaida siunčiant priminimą ${reservation.email} (rezervacija #${reservation.id}):`, emailError.message);
+        console.error(`❌ [DEBUG] Klaidos tipas: ${emailError.name}`);
+        console.error(`❌ [DEBUG] Klaidos kodas: ${emailError.code || 'N/A'}`);
+        console.error(`❌ [DEBUG] Klaidos stack:`, emailError.stack);
+        console.error('❌ [DEBUG] Visos klaidos detalės:', JSON.stringify(emailError, null, 2));
         // Tęsti su kitomis rezervacijomis net jei viena nepavyko
       }
     }
+    
+    console.log(`📧 [DEBUG] sendReminderEmails funkcija baigta: ${new Date().toISOString()}\n`);
+    
   } catch (error) {
-    console.error('❌ Klaida sendReminderEmails funkcijoje:', error);
-    console.error('Klaidos detalės:', error);
+    console.error('❌ [DEBUG] Klaida sendReminderEmails funkcijoje:', error.message);
+    console.error('❌ [DEBUG] Klaidos tipas:', error.name);
+    console.error('❌ [DEBUG] Klaidos stack:', error.stack);
+    console.error('❌ [DEBUG] Visos klaidos detalės:', JSON.stringify(error, null, 2));
   }
 }
 
