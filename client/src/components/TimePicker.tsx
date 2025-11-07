@@ -122,7 +122,6 @@ export default function TimePicker({ selectedTime, onTimeSelect, reservedTimes =
                   `}
                 >
                   {minute}
-                  {reserved && <span className="text-xs block">{t('reservation.booked')}</span>}
                 </button>
               );
             })}

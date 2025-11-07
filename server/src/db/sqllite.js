@@ -1,9 +1,12 @@
 import Database from 'better-sqlite3'; 
 import dotenv from 'dotenv';
+import bcrypt from 'bcrypt';
+const saltRounds = 10;
 
 dotenv.config();
-
 const db = new Database('reservations.db');
+const username = "admin";
+const password = await bcrypt.hash("adm1n", saltRounds);
 
 // Enable foreign keys
 db.pragma('foreign_keys = ON');
@@ -24,9 +27,10 @@ db.prepare(`
 db.prepare(`
     CREATE TABLE IF NOT EXISTS admin (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT NOT NULL,
+            username TEXT NOT NULL UNIQUE,
             password TEXT NOT NULL
         );
+        
   `).run();
   db.prepare(`
     CREATE TABLE IF NOT EXISTS photos (
@@ -37,5 +41,10 @@ db.prepare(`
             created_at TEXT DEFAULT CURRENT_TIMESTAMP
         );
   `).run();
+  db.prepare(`
+  INSERT OR IGNORE INTO admin (username, password)
+        VALUES (?, ?);
+  `).run(username, password);
+
 export default db;
 

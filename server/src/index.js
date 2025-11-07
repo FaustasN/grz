@@ -118,7 +118,7 @@ function logAllReservationsDebug() {
   }
 }
 
-const saltRounds = 10;
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -174,7 +174,7 @@ app.use('/uploads', express.static(join(__dirname, '..', 'uploads')));
 // CORS middleware
 app.use((req, res, next) => {
   // In production, replace '*' with your actual frontend domain
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', 'https://www.varikliosala.lt');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   
@@ -386,19 +386,6 @@ app.post('/api/auth/login', async (req, res) => {
     });
   }
 });
-
-app.post('/create-admin-user', async (req, res) => {// temp endpoint to create admin user for production
-  const username = "admin";
-  const password = await bcrypt.hash("admin", saltRounds);
-  const query = `INSERT INTO admin (username, password) VALUES (?, ?)`;
-  db.prepare(query).run(username, password);
-  res.status(200).json({ message: 'Admin user created', username: username, password: password });
-}); 
-app.post('/test-endpoint', async (req, res) => {// temp endpoint to test server
-  const query = `INSERT INTO reservations (name, email, phone, reservation_date, service_type, additional_info) VALUES (?, ?, ?, ?, ?, ?)`;
-  db.prepare(query).run("Jonas Jonaitis", "jonas@example.com", "061234567", "2025-11-07 00:45:00", "tire_alignment", "Papildoma informacija");
-  res.status(200).json({ message: 'Reservation created' });
-}); 
 
 app.post('/api/photos/before', authenticateToken, (req, res, next) => {
   upload.array('photos', 10)(req, res, (err) => {
@@ -726,7 +713,7 @@ app.post('/api/reservations', async (req, res) => {
     // Send email notification asynchronously (don't wait for it)
     transporter.sendMail({
       from: process.env.EMAIL_USER,
-      to: "noreikafaustas@gmail.com",
+      to: "varikliosala@gmail.com",
       subject: `Nauja rezervacija: ${service_type}`,
       text: `Nauja rezervacija:\n\nVardas: ${name}\nTelefonas: ${phone}\nData ir laikas: ${reservation_date}\nPaslauga: ${service_type}\nPapildoma informacija: ${additional_info || 'Nėra papildomos informacijos'}`
     }).catch(emailError => {
@@ -797,6 +784,5 @@ app.use((error, req, res, next) => {
 app.listen(PORT, () => {
   const vilniusTime = getVilniusTime();
   console.log(`Server is running on http://localhost:${PORT}`);
-  console.log(`🌍 Laiko zona: Europe/Vilnius`);
   console.log(`🕐 Dabartinis Vilniaus laikas: ${vilniusTime}`);
 });

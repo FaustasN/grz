@@ -28,6 +28,28 @@ export default function ReservationModal({ isOpen, onClose, onSuccess }: Reserva
   const [reservedTimes, setReservedTimes] = useState<string[]>([]);
   const [isLoadingTimes, setIsLoadingTimes] = useState(false);
 
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      // Save current scroll position
+      const scrollY = window.scrollY;
+      // Apply styles to prevent scrolling
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+      
+      return () => {
+        // Restore scroll position when modal closes
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [isOpen]);
+
   // Refresh times when selectedService changes and date is already selected
   useEffect(() => {
     if (selectedDate && selectedService && step === 'time') {
@@ -491,9 +513,14 @@ export default function ReservationModal({ isOpen, onClose, onSuccess }: Reserva
 
                 {/* Name */}
                 <div>
-                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
-                    <User size={18} />
-                        {t('reservation.name')} *
+                  <label className="flex items-center justify-between text-sm font-medium text-gray-700 mb-2">
+                    <span className="flex items-center gap-2">
+                      <User size={20} />
+                      {t('reservation.name')} *
+                    </span>
+                    <span className={`text-xs ${formData.name.length > 20 ? 'text-red-500' : 'text-gray-500'}`}>
+                      {formData.name.length}/20
+                    </span>
                   </label>
                   <input
                     type="text"
@@ -502,35 +529,44 @@ export default function ReservationModal({ isOpen, onClose, onSuccess }: Reserva
                       const value = e.target.value;
                       // Only allow letters, spaces, hyphens, and Lithuanian characters
                       if (value === '' || /^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ\s-]*$/.test(value)) {
-                        setFormData({ ...formData, name: value });
+                        if (value.length <= 20) {
+                          setFormData({ ...formData, name: value });
+                        }
                       }
                     }}
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-gray-800 focus:border-transparent outline-none transition-all"
                     placeholder={t('reservation.namePlaceholder')}
                     required
                     minLength={3}
-                    maxLength={50}
+                    maxLength={20}
                   />
                   <p className="text-xs text-gray-500 mt-1">{t('reservation.nameMinLength')}</p>
                 </div>
 
                 {/* Email */}
                 <div>
-                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
-                    <Mail size={18} />
-                    {t('reservation.email')} *
+                  <label className="flex items-center justify-between text-sm font-medium text-gray-700 mb-2">
+                    <span className="flex items-center gap-2">
+                      <Mail size={25} />
+                      {t('reservation.email')} *
+                    </span>
+                    <span className={`text-xs ${formData.email.length > 25 ? 'text-red-500' : 'text-gray-500'}`}>
+                      {formData.email.length}/25
+                    </span>
                   </label>
                   <input
                     type="email"
                     value={formData.email}
                     onChange={(e) => {
                       const value = e.target.value;
-                      setFormData({ ...formData, email: value });
+                      if (value.length <= 25) {
+                        setFormData({ ...formData, email: value });
+                      }
                     }}
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-gray-800 focus:border-transparent outline-none transition-all"
                     placeholder="example@example.com"
                     required
-                    maxLength={50}
+                    maxLength={25}
                   />
                   <p className="text-xs text-gray-500 mt-1">{t('reservation.emailFormat')}</p>
                 </div>

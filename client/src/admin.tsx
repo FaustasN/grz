@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Calendar, Phone, User, Trash2, RefreshCw, Search, X, LogOut, ArrowUp, ArrowDown, Plus, ChevronLeft, ChevronRight, Upload, Image as ImageIcon } from 'lucide-react';
+import { Calendar, Phone, User, Trash2, RefreshCw, Search, X, LogOut, ArrowUp, ArrowDown, Plus, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, Upload, Image as ImageIcon } from 'lucide-react';
 import AdminLogin from './components/AdminLogin';
 import ReservationModal from './components/ReservationModalAdmin';
 import { API_ENDPOINTS, API_BASE_URL } from './config/api';
@@ -53,10 +53,12 @@ export default function AdminPage() {
   const [photoGroups, setPhotoGroups] = useState<PhotoGroup[]>([]);
   const [isLoadingPhotos, setIsLoadingPhotos] = useState(false);
   const [photoDeleteConfirm, setPhotoDeleteConfirm] = useState<number | null>(null);
+  const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
   
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [isSortExpanded, setIsSortExpanded] = useState(false);
 
   // Check for existing token on mount
   useEffect(() => {
@@ -502,61 +504,85 @@ export default function AdminPage() {
               )}
             </div>
 
-            {/* Sort Controls */}
-            <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-200">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-                <span className="text-sm font-semibold text-gray-700">Rūšiuoti:</span>
-                <div className="flex flex-wrap gap-2">
-                  <button
-                    onClick={() => setSortField('reservation_date')}
-                    className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300 ${
-                      sortField === 'reservation_date'
-                        ? 'bg-gray-800 text-white shadow-md scale-105'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105 active:scale-95'
-                    }`}
-                  >
-                    📅 Rezervacijos data
-                  </button>
-                  <button
-                    onClick={() => setSortField('created_at')}
-                    className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300 ${
-                      sortField === 'created_at'
-                        ? 'bg-gray-800 text-white shadow-md scale-105'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105 active:scale-95'
-                    }`}
-                  >
-                    🕐 Sukūrimo data
-                  </button>
-                  <button
-                    onClick={() => setSortField('name')}
-                    className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300 ${
-                      sortField === 'name'
-                        ? 'bg-gray-800 text-white shadow-md scale-105'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105 active:scale-95'
-                    }`}
-                  >
-                    👤 Vardas
-                  </button>
+            {/* Sort Controls - Collapsible */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+              {/* Sort Header - Always Visible */}
+              <button
+                onClick={() => setIsSortExpanded(!isSortExpanded)}
+                className="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-sm font-semibold text-gray-700">Rūšiuoti:</span>
+                  <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                    {sortField === 'reservation_date' && '📅 Rezervacijos data'}
+                    {sortField === 'created_at' && '🕐 Sukūrimo data'}
+                    {sortField === 'name' && '👤 Vardas'}
+                    {' '}
+                    {sortOrder === 'asc' ? '↑' : '↓'}
+                  </span>
                 </div>
-                <button
-                  onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
-                  className="flex items-center justify-center gap-2 px-4 py-2 bg-white border-2 border-gray-300 rounded-lg text-xs sm:text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 hover:scale-105 active:scale-95"
-                >
-                  {sortOrder === 'asc' ? (
-                    <>
-                      <ArrowUp size={16} />
-                      <span className="hidden sm:inline">Didėjančia</span>
-                      <span className="sm:hidden">↑</span>
-                    </>
-                  ) : (
-                    <>
-                      <ArrowDown size={16} />
-                      <span className="hidden sm:inline">Mažėjančia</span>
-                      <span className="sm:hidden">↓</span>
-                    </>
-                  )}
-                </button>
-              </div>
+                {isSortExpanded ? (
+                  <ChevronUp size={20} className="text-gray-500" />
+                ) : (
+                  <ChevronDown size={20} className="text-gray-500" />
+                )}
+              </button>
+
+              {/* Sort Content - Collapsible */}
+              {isSortExpanded && (
+                <div className="px-4 pb-4 pt-0 border-t border-gray-100 animate-fade-in">
+                  <div className="flex flex-col gap-3 pt-4">
+                    <div className="flex flex-wrap gap-2">
+                      <button
+                        onClick={() => setSortField('reservation_date')}
+                        className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300 ${
+                          sortField === 'reservation_date'
+                            ? 'bg-gray-800 text-white shadow-md scale-105'
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105 active:scale-95'
+                        }`}
+                      >
+                        📅 Rezervacijos data
+                      </button>
+                      <button
+                        onClick={() => setSortField('created_at')}
+                        className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300 ${
+                          sortField === 'created_at'
+                            ? 'bg-gray-800 text-white shadow-md scale-105'
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105 active:scale-95'
+                        }`}
+                      >
+                        🕐 Sukūrimo data
+                      </button>
+                      <button
+                        onClick={() => setSortField('name')}
+                        className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300 ${
+                          sortField === 'name'
+                            ? 'bg-gray-800 text-white shadow-md scale-105'
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105 active:scale-95'
+                        }`}
+                      >
+                        👤 Vardas
+                      </button>
+                    </div>
+                    <button
+                      onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+                      className="flex items-center justify-center gap-2 px-4 py-2 bg-white border-2 border-gray-300 rounded-lg text-xs sm:text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 hover:scale-105 active:scale-95 w-full sm:w-auto"
+                    >
+                      {sortOrder === 'asc' ? (
+                        <>
+                          <ArrowUp size={16} />
+                          <span>Didėjančia</span>
+                        </>
+                      ) : (
+                        <>
+                          <ArrowDown size={16} />
+                          <span>Mažėjančia</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           )}
@@ -898,114 +924,142 @@ export default function AdminPage() {
                 </div>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="max-w-4xl mx-auto space-y-6">
                 {photoGroups.map((group, groupIndex) => (
                   <div
                     key={groupIndex}
-                    className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300"
+                    className="bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden"
                   >
                     {/* Caption Header */}
-                    <div className="bg-gradient-to-r from-gray-800 to-gray-700 px-4 py-3">
-                      <h3 className="text-white font-bold text-sm sm:text-base truncate">
+                    <div className="bg-gradient-to-r from-gray-800 to-gray-700 px-3 py-2 sm:px-4 sm:py-2.5 text-center">
+                      <h3 className="text-white font-bold text-sm sm:text-base">
                         {group.caption}
                       </h3>
                     </div>
 
-                    {/* Photos Grid */}
-                    <div className="p-4 space-y-4">
-                      {/* Before Photos */}
-                      {group.before.length > 0 && (
-                        <div>
-                          <p className="text-xs font-semibold text-gray-600 mb-2">Prieš</p>
-                          <div className="grid grid-cols-2 gap-2">
-                            {group.before.map((photo) => (
-                              <div key={photo.id} className="relative group">
-                                <div className="aspect-square rounded-lg overflow-hidden bg-gray-100">
-                                  <img
-                                    src={`${API_BASE_URL}${photo.photo_url}`}
-                                    alt={photo.caption || 'Prieš'}
-                                    className="w-full h-full object-cover"
-                                    onError={(e) => {
-                                      (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100"%3E%3Crect width="100" height="100" fill="%23ddd"/%3E%3Ctext x="50" y="50" text-anchor="middle" dy=".3em" fill="%23999"%3EKlaida%3C/text%3E%3C/svg%3E';
-                                    }}
-                                  />
-                                </div>
-                                {photoDeleteConfirm === photo.id ? (
-                                  <div className="absolute inset-0 bg-black/80 rounded-lg flex flex-col items-center justify-center gap-2 p-2">
-                                    <button
-                                      onClick={() => handleDeletePhoto(photo.id)}
-                                      className="px-3 py-1.5 bg-red-600 text-white text-xs font-bold rounded-lg hover:bg-red-700"
-                                    >
-                                      Ištrinti
-                                    </button>
-                                    <button
-                                      onClick={() => setPhotoDeleteConfirm(null)}
-                                      className="px-3 py-1.5 bg-gray-600 text-white text-xs font-bold rounded-lg hover:bg-gray-700"
-                                    >
-                                      Atšaukti
-                                    </button>
-                                  </div>
-                                ) : (
-                                  <button
-                                    onClick={() => setPhotoDeleteConfirm(photo.id)}
-                                    className="absolute top-2 right-2 bg-red-600 text-white p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700"
-                                    aria-label="Ištrinti nuotrauką"
+                    {/* Photos Layout - Two Columns like gallery.tsx */}
+                    <div className="p-2 sm:p-3 md:p-4">
+                      <div className="grid grid-cols-2 gap-2 sm:gap-3 md:gap-4">
+                        {/* Before Photos - Left */}
+                        <div className="space-y-1.5 sm:space-y-2">
+                          {group.before.length > 0 && (
+                            <>
+                              <h3 className="text-xs font-semibold text-gray-800 mb-1 sm:mb-2 flex items-center gap-1.5">
+                                <span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span>
+                                Prieš
+                              </h3>
+                              <div className="space-y-1 sm:space-y-1.5">
+                                {group.before.map((photo) => (
+                                  <div
+                                    key={photo.id}
+                                    className="relative group overflow-hidden rounded-lg bg-gray-100 aspect-square shadow-sm cursor-pointer"
+                                    onClick={() => setSelectedPhoto(`${API_BASE_URL}${photo.photo_url}`)}
                                   >
-                                    <Trash2 size={14} />
-                                  </button>
-                                )}
+                                    <img
+                                      src={`${API_BASE_URL}${photo.photo_url}`}
+                                      alt={group.caption}
+                                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                      onError={(e) => {
+                                        (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100"%3E%3Crect width="100" height="100" fill="%23ddd"/%3E%3Ctext x="50" y="50" text-anchor="middle" dy=".3em" fill="%23999"%3EKlaida%3C/text%3E%3C/svg%3E';
+                                      }}
+                                    />
+                                    {photoDeleteConfirm === photo.id ? (
+                                      <div 
+                                        className="absolute inset-0 bg-black/80 rounded-lg flex flex-col items-center justify-center gap-2 p-2 z-20"
+                                        onClick={(e) => e.stopPropagation()}
+                                      >
+                                        <button
+                                          onClick={() => handleDeletePhoto(photo.id)}
+                                          className="px-3 py-1.5 bg-red-600 text-white text-xs font-bold rounded-lg hover:bg-red-700"
+                                        >
+                                          Ištrinti
+                                        </button>
+                                        <button
+                                          onClick={() => setPhotoDeleteConfirm(null)}
+                                          className="px-3 py-1.5 bg-gray-600 text-white text-xs font-bold rounded-lg hover:bg-gray-700"
+                                        >
+                                          Atšaukti
+                                        </button>
+                                      </div>
+                                    ) : (
+                                      <button
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          setPhotoDeleteConfirm(photo.id);
+                                        }}
+                                        className="absolute top-2 right-2 bg-red-600 text-white p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700 z-10"
+                                        aria-label="Ištrinti nuotrauką"
+                                      >
+                                        <Trash2 size={14} />
+                                      </button>
+                                    )}
+                                  </div>
+                                ))}
                               </div>
-                            ))}
-                          </div>
+                            </>
+                          )}
                         </div>
-                      )}
 
-                      {/* After Photos */}
-                      {group.after.length > 0 && (
-                        <div>
-                          <p className="text-xs font-semibold text-gray-600 mb-2">Po</p>
-                          <div className="grid grid-cols-2 gap-2">
-                            {group.after.map((photo) => (
-                              <div key={photo.id} className="relative group">
-                                <div className="aspect-square rounded-lg overflow-hidden bg-gray-100">
-                                  <img
-                                    src={`${API_BASE_URL}${photo.photo_url}`}
-                                    alt={photo.caption || 'Po'}
-                                    className="w-full h-full object-cover"
-                                    onError={(e) => {
-                                      (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100"%3E%3Crect width="100" height="100" fill="%23ddd"/%3E%3Ctext x="50" y="50" text-anchor="middle" dy=".3em" fill="%23999"%3EKlaida%3C/text%3E%3C/svg%3E';
-                                    }}
-                                  />
-                                </div>
-                                {photoDeleteConfirm === photo.id ? (
-                                  <div className="absolute inset-0 bg-black/80 rounded-lg flex flex-col items-center justify-center gap-2 p-2">
-                                    <button
-                                      onClick={() => handleDeletePhoto(photo.id)}
-                                      className="px-3 py-1.5 bg-red-600 text-white text-xs font-bold rounded-lg hover:bg-red-700"
-                                    >
-                                      Ištrinti
-                                    </button>
-                                    <button
-                                      onClick={() => setPhotoDeleteConfirm(null)}
-                                      className="px-3 py-1.5 bg-gray-600 text-white text-xs font-bold rounded-lg hover:bg-gray-700"
-                                    >
-                                      Atšaukti
-                                    </button>
-                                  </div>
-                                ) : (
-                                  <button
-                                    onClick={() => setPhotoDeleteConfirm(photo.id)}
-                                    className="absolute top-2 right-2 bg-red-600 text-white p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700"
-                                    aria-label="Ištrinti nuotrauką"
+                        {/* After Photos - Right */}
+                        <div className="space-y-1.5 sm:space-y-2">
+                          {group.after.length > 0 && (
+                            <>
+                              <h3 className="text-xs font-semibold text-gray-800 mb-1 sm:mb-2 flex items-center gap-1.5">
+                                <span className="w-1.5 h-1.5 bg-emerald-600 rounded-full"></span>
+                                Po
+                              </h3>
+                              <div className="space-y-1 sm:space-y-1.5">
+                                {group.after.map((photo) => (
+                                  <div
+                                    key={photo.id}
+                                    className="relative group overflow-hidden rounded-lg bg-gray-100 aspect-square shadow-sm cursor-pointer"
+                                    onClick={() => setSelectedPhoto(`${API_BASE_URL}${photo.photo_url}`)}
                                   >
-                                    <Trash2 size={14} />
-                                  </button>
-                                )}
+                                    <img
+                                      src={`${API_BASE_URL}${photo.photo_url}`}
+                                      alt={group.caption}
+                                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                      onError={(e) => {
+                                        (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100"%3E%3Crect width="100" height="100" fill="%23ddd"/%3E%3Ctext x="50" y="50" text-anchor="middle" dy=".3em" fill="%23999"%3EKlaida%3C/text%3E%3C/svg%3E';
+                                      }}
+                                    />
+                                    {photoDeleteConfirm === photo.id ? (
+                                      <div 
+                                        className="absolute inset-0 bg-black/80 rounded-lg flex flex-col items-center justify-center gap-2 p-2 z-20"
+                                        onClick={(e) => e.stopPropagation()}
+                                      >
+                                        <button
+                                          onClick={() => handleDeletePhoto(photo.id)}
+                                          className="px-3 py-1.5 bg-red-600 text-white text-xs font-bold rounded-lg hover:bg-red-700"
+                                        >
+                                          Ištrinti
+                                        </button>
+                                        <button
+                                          onClick={() => setPhotoDeleteConfirm(null)}
+                                          className="px-3 py-1.5 bg-gray-600 text-white text-xs font-bold rounded-lg hover:bg-gray-700"
+                                        >
+                                          Atšaukti
+                                        </button>
+                                      </div>
+                                    ) : (
+                                      <button
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          setPhotoDeleteConfirm(photo.id);
+                                        }}
+                                        className="absolute top-2 right-2 bg-red-600 text-white p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700 z-10"
+                                        aria-label="Ištrinti nuotrauką"
+                                      >
+                                        <Trash2 size={14} />
+                                      </button>
+                                    )}
+                                  </div>
+                                ))}
                               </div>
-                            ))}
-                          </div>
+                            </>
+                          )}
                         </div>
-                      )}
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -1021,6 +1075,28 @@ export default function AdminPage() {
         onClose={() => setIsReservationModalOpen(false)}
         onSuccess={handleReservationSuccess}
       />
+
+      {/* Lightbox Modal */}
+      {selectedPhoto && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setSelectedPhoto(null)}
+        >
+          <button
+            onClick={() => setSelectedPhoto(null)}
+            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors p-2"
+            aria-label="Uždaryti"
+          >
+            <X size={32} />
+          </button>
+          <img
+            src={selectedPhoto}
+            alt="Padidinta nuotrauka"
+            className="max-w-full max-h-full object-contain rounded-lg"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
 
       {/* Upload Modal */}
       {isUploadModalOpen && (
