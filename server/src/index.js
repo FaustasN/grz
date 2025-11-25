@@ -12,8 +12,6 @@ import fs from 'fs';
 dotenv.config();
 
 const VILNIUS_TIME_ZONE = 'Europe/Vilnius';
-
-// Nustatyti laiko zoną į Europa/Vilnius
 process.env.TZ = VILNIUS_TIME_ZONE;
 
 const VILNIUS_DATETIME_FORMATTER = new Intl.DateTimeFormat('en-GB', {
@@ -76,19 +74,17 @@ function getReminderWindow(now = new Date(), window = REMINDER_WINDOW_MINUTES) {
   };
 }
 
-// Helper funkcija, kuri grąžina Vilniaus laiką SQLite formatu (YYYY-MM-DD HH:MM:SS)
 function getVilniusTime() {
   return formatSQLiteDate(createVilniusDate());
 }
 
-// Helper funkcija, kuri grąžina Vilniaus laiką su offset (minutėmis)
+
 function getVilniusTimeWithOffset(offsetMinutes) {
   const baseDate = createVilniusDate();
   const targetDate = addMinutes(baseDate, offsetMinutes);
   return formatSQLiteDate(targetDate);
 }
 
-// TEMP DEBUG: log every reservation for troubleshooting reminder logic
 function logAllReservationsDebug() {
   try {
     const query = `
@@ -122,18 +118,15 @@ function logAllReservationsDebug() {
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Get __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Create uploads directory if it doesn't exist
 const uploadsDir = join(__dirname, '..', 'uploads', 'photos');
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
 }
 
 
-// Configure multer for file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, uploadsDir);
@@ -147,7 +140,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ 
   storage: storage,
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
+  limits: { fileSize: 10 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     if (file.mimetype.startsWith('image/')) {
       cb(null, true);
@@ -157,28 +150,25 @@ const upload = multer({
   }
 });
 
-// Rate limiting middleware
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
+  windowMs: 15 * 60 * 1000,
+  max: 100,
 });
 app.use(limiter);
 
-// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static files from uploads directory
 app.use('/uploads', express.static(join(__dirname, '..', 'uploads')));
 
-// CORS middleware
+
 app.use((req, res, next) => {
-  // In production, replace '*' with your actual frontend domain
-  res.header('Access-Control-Allow-Origin', 'https://www.varikliosala.lt');
+
+  res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   
-  // Handle preflight requests
+
   if (req.method === 'OPTIONS') {
     return res.sendStatus(200);
   }
@@ -195,21 +185,21 @@ const transporter = nodemailer.createTransport({
 });
 
 
-// Function to clean up old reservations (older than reservation_date)
+
 function cleanupOldReservations() {
   try {
-    // Check if the reservations table exists
+
     const tableExists = db.prepare(`
       SELECT name FROM sqlite_master 
       WHERE type='table' AND name='reservations'
     `).get();
     
     if (!tableExists) {
-      // Table doesn't exist yet, skip cleanup
+
       return;
     }
     
-    // Use Vilnius time to match the stored format (YYYY-MM-DD HH:MM:SS)
+
     const currentVilniusTime = getVilniusTime();
     const query = `DELETE FROM reservations WHERE reservation_date < ?`;
     const result = db.prepare(query).run(currentVilniusTime);
@@ -221,13 +211,12 @@ function cleanupOldReservations() {
   }
 }
 
-// Run cleanup on startup
+
 cleanupOldReservations();
 
-// Run cleanup every 24 hours (86400000 ms)
 setInterval(cleanupOldReservations, 86400000);
 
-// Function to send reminder emails 30 minutes before reservation
+
 async function sendReminderEmails(invocationDate = new Date()) {
   const invocationIso = invocationDate.toISOString();
   console.log(`\n📧 [DEBUG] sendReminderEmails funkcija paleista: ${invocationIso}`);
@@ -334,14 +323,13 @@ function buildReminderEmailContent(reservation) {
   return { html, text };
 }
 
-// Paleisti priminimų funkciją kas 2 minutes (120000 ms)
+
 setInterval(sendReminderEmails, 2 * 60 * 1000);
 
-// Paleisti iš karto paleidžiant serverį (patikrinti ar yra artėjančių rezervacijų)
+
 sendReminderEmails();
 
 
-// Login endpoint with bcrypt 
 app.post('/api/auth/login', async (req, res) => {
   const { username, password } = req.body;
 
@@ -351,8 +339,7 @@ app.post('/api/auth/login', async (req, res) => {
       message: 'Username and password required' 
     });
   }
-
-  // Simple authentication (in production, check against database with hashed passwords)
+``
   try {
     const admin = db.prepare('SELECT username, password FROM admin WHERE username = ?').get(username);
 
@@ -479,14 +466,10 @@ app.post('/api/photos/after', authenticateToken, (req, res, next) => {
   }
 });
 
-// ===== PHOTOS CRUD OPERATIONS =====
 
-// CREATE - Already implemented in /api/photos/before and /api/photos/after
-
-// READ - Get all photos
 app.get('/api/photos', async (req, res) => {
   try {
-    const { type } = req.query; // Optional filter by photo_type
+    const { type } = req.query;
     let query = `SELECT * FROM photos`;
     let params = [];
     
@@ -505,7 +488,7 @@ app.get('/api/photos', async (req, res) => {
   }
 });
 
-// READ - Get photo by ID
+
 app.get('/api/photos/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -522,23 +505,19 @@ app.get('/api/photos/:id', async (req, res) => {
   }
 });
 
-// DELETE - Delete photo
+
 app.delete('/api/photos/:id', authenticateToken, async (req, res) => {
   try {
     const { id } = req.params;
     
-    // Get photo info before deleting
     const photo = db.prepare('SELECT photo_url FROM photos WHERE id = ?').get(id);
     
     if (!photo) {
       return res.status(404).json({ success: false, message: 'Nuotrauka nerasta' });
     }
-    // Delete file from disk FIRST (before deleting from database)
     if (photo.photo_url) {
-      // photo_url format: /uploads/photos/filename.jpg
-      // We need: server/uploads/photos/filename.jpg
       const relativePath = photo.photo_url.startsWith('/') 
-        ? photo.photo_url.substring(1) // Remove leading slash: uploads/photos/filename.jpg
+        ? photo.photo_url.substring(1)
         : photo.photo_url;
       
       const filePath = join(__dirname, '..', relativePath);
@@ -548,14 +527,12 @@ app.delete('/api/photos/:id', authenticateToken, async (req, res) => {
           fs.unlinkSync(filePath);
         } catch (fileError) {
           console.error(`Error deleting file ${filePath}:`, fileError);
-          // Continue with database deletion even if file deletion fails
         }
       } else {
         console.warn(`File not found: ${filePath}`);
       }
     }
 
-    // Delete from database
     db.prepare('DELETE FROM photos WHERE id = ?').run(id);
 
     res.status(200).json({ success: true, message: 'Nuotrauka sėkmingai ištrinta' });
@@ -565,13 +542,12 @@ app.delete('/api/photos/:id', authenticateToken, async (req, res) => {
   }
 });
 
-// Get reserved times for a specific date (PUBLIC - needed for booking form)
+
 app.get('/api/reservations/date/:date', async (req, res) => {
   const { date } = req.params;
   const { service_type } = req.query;
   
   try {
-    // Get reservations for this date with optional service_type filter
     let query = `
       SELECT reservation_date, service_type
       FROM reservations 
@@ -579,7 +555,6 @@ app.get('/api/reservations/date/:date', async (req, res) => {
     `;
     let params = [date];
     
-    // If service_type is provided, filter by it
     if (service_type) {
       query += ` AND service_type = ?`;
       params.push(service_type);
@@ -604,7 +579,7 @@ app.get('/api/reservations/date/:date', async (req, res) => {
   }
 });
 
-// Get all reservations with pagination (PROTECTED - admin only)
+
 app.get('/api/reservations', authenticateToken, async (req, res) => {
   const { page = 1, limit = 10 } = req.query;
   try {
@@ -634,7 +609,6 @@ app.get('/api/reservations', authenticateToken, async (req, res) => {
   }
 });
 
-// Get single reservation by ID (PROTECTED - admin only)
 app.get('/api/reservations/:id', authenticateToken, async (req, res) => {
   const { id } = req.params;
   
@@ -666,11 +640,9 @@ app.get('/api/reservations/:id', authenticateToken, async (req, res) => {
   }
 });
 
-// Create a new reservation (PUBLIC - users need this for booking)
 app.post('/api/reservations', async (req, res) => {
   const { name, email, phone, reservation_date, service_type, additional_info } = req.body;
 
-  // Validation
   if (!name || !email || !phone || !reservation_date || !service_type) {
     return res.status(400).json({ 
       success: false, 
@@ -679,7 +651,6 @@ app.post('/api/reservations', async (req, res) => {
   }
 
   try {
-    // Check if a reservation already exists for this time with the same service type
     const checkQuery = `
       SELECT id FROM reservations 
       WHERE reservation_date = ? AND service_type = ?
@@ -703,22 +674,19 @@ app.post('/api/reservations', async (req, res) => {
     const result = db.prepare(query).run(values);
     const inserted = db.prepare('SELECT * FROM reservations WHERE id = ?').get(result.lastInsertRowid);
     
-    // Send response immediately after database insert
     res.status(201).json({ 
       success: true, 
       message: 'Reservation created successfully',
       data: inserted
     });
     
-    // Send email notification asynchronously (don't wait for it)
     transporter.sendMail({
       from: process.env.EMAIL_USER,
-      to: "varikliosala@gmail.com",
+      to: "noreikafaustas@gmail.com",
       subject: `Nauja rezervacija: ${service_type}`,
       text: `Nauja rezervacija:\n\nVardas: ${name}\nTelefonas: ${phone}\nData ir laikas: ${reservation_date}\nPaslauga: ${service_type}\nPapildoma informacija: ${additional_info || 'Nėra papildomos informacijos'}`
     }).catch(emailError => {
       console.error('Error sending email notification:', emailError);
-      // Email failure doesn't affect the reservation
     });
   } catch (error) {
     console.error('Error creating reservation:', error);
@@ -730,12 +698,10 @@ app.post('/api/reservations', async (req, res) => {
   }
 });
 
-// Delete reservation (PROTECTED - admin only)
 app.delete('/api/reservations/:id', authenticateToken, async (req, res) => {
   const { id } = req.params;
   
   try {
-    // Get the reservation before deleting
     const existing = db.prepare('SELECT * FROM reservations WHERE id = ?').get(id);
     
     if (!existing) {
@@ -766,7 +732,6 @@ app.delete('/api/reservations/:id', authenticateToken, async (req, res) => {
   }
 });
 
-// Error handler for multer and other errors
 app.use((error, req, res, next) => {
   if (error instanceof multer.MulterError) {
     if (error.code === 'LIMIT_FILE_SIZE') {
@@ -780,7 +745,6 @@ app.use((error, req, res, next) => {
   next();
 });
 
-// Start server
 app.listen(PORT, () => {
   const vilniusTime = getVilniusTime();
   console.log(`Server is running on http://localhost:${PORT}`);
