@@ -8,6 +8,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { getServiceImage } from '../components/utils/servicesConfig';
 import ScrollToTop from '../components/ui/ScrollToTop';
+import PrivacyPolicy from '../components/forms/PrivacyPolicy';
 
 export default function ServicesPage() {
   const containerRef = useScrollAnimation();
@@ -177,7 +178,7 @@ export default function ServicesPage() {
               </div>
             </div>
           </Link>
-          <Link
+          <a
             href="tel:+37068513131"
             className="block w-full scroll-animate scroll-animate-delay-200"
           >
@@ -197,9 +198,10 @@ export default function ServicesPage() {
                 </h3>
               </div>
             </div>
-          </Link>
+          </a>
         </div>
         </div>
+        <PrivacyPolicy />
         </main>
       <Footer />
       <ScrollToTop />
