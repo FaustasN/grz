@@ -5,6 +5,7 @@ import Header from '../components/layout/Header';
 import { API_ENDPOINTS, API_BASE_URL } from '../components/utils/api';
 import Footer from '../components/layout/Footer';
 import ScrollToTop from '../components/ui/ScrollToTop';
+import PrivacyPolicy from '../components/forms/PrivacyPolicy';
 
 interface Photo {
   id: number;
@@ -245,6 +246,7 @@ export default function GalleryPageClient() {
       </div>
      <Footer />
      <ScrollToTop /> 
+     <PrivacyPolicy />
 
       {selectedPhoto && (
         <div

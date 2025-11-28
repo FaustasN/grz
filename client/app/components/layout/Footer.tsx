@@ -19,7 +19,7 @@ export default function Footer() {
                 <a href="mailto:varikliosala@gmail.com" className="hover:text-white transition-colors break-all">
                   varikliosala@gmail.com
                 </a>
-              </li>
+              </li>s
               <li>Kalno g. 83, Melekonių k, 14119 Melekonys</li>
             </ul>
           </div>
