@@ -27,9 +27,9 @@ export default function Footer() {
             <h4 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Nuorodos</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#apie-mus" className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors">
+                <Link href="/" className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors">
                   Apie mus
-                </a>
+                </Link>
               </li>
               <li>
                 <Link href="/paslaugos" className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors">
@@ -37,14 +37,14 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="#kontaktai" className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors">
+                <a href="/kontaktai" className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors">
                   Kontaktai
                 </a>
               </li>
               <li>
-                <a href="https://rekvizitai.vz.lt/imone/variklio_sala/" className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors">
+                <Link href="https://rekvizitai.vz.lt/imone/variklio_sala/" className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors">
                   Rekvizitai
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

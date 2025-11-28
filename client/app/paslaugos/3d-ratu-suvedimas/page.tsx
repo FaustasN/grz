@@ -9,6 +9,7 @@ import Head from 'next/head';
 import ReservationModal from '../../components/forms/ReservationModal';
 import ScrollToTop from '../../components/ui/ScrollToTop';
 import { useScrollAnimation } from '../../components/utils/useScrollAnimation';
+import PrivacyPolicy from '../../components/forms/PrivacyPolicy';
     export default function WheelAlignmentPage() {
   const containerRef = useScrollAnimation();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -73,6 +74,7 @@ import { useScrollAnimation } from '../../components/utils/useScrollAnimation';
             </button>
           </div>
         </div>
+        <PrivacyPolicy />
       </main>
       <Footer />
       <ReservationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />

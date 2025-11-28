@@ -9,6 +9,7 @@ import { getServiceImage } from '../../components/utils/servicesConfig';
 import ReservationModal from '../../components/forms/ReservationModal';
 import ScrollToTop from '../../components/ui/ScrollToTop';
 import { useScrollAnimation } from '../../components/utils/useScrollAnimation'; 
+import PrivacyPolicy from '../../components/forms/PrivacyPolicy';
 export default function DiagnosticsPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const containerRef = useScrollAnimation();
@@ -86,6 +87,7 @@ export default function DiagnosticsPage() {
             </button>
           </div>
         </div>
+        <PrivacyPolicy />
       </main>
       <Footer />
       <ReservationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
