@@ -27,7 +27,7 @@ export default function Footer() {
             <h4 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Nuorodos</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors">
+                <Link href="#apie-mus" className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors">
                   Apie mus
                 </Link>
               </li>
@@ -37,7 +37,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="/kontaktai" className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors">
+                <a href="#kontaktai" className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors">
                   Kontaktai
                 </a>
               </li>

@@ -7,7 +7,6 @@ import ContactSection from './components/layout/ContactSection';
 import PrivacyPolicy from './components/forms/PrivacyPolicy';
 import ScrollToTop from './components/ui/ScrollToTop';
 export default async function HomePage() {
-  
   return (
     <>
       <Header  />
