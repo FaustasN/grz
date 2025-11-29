@@ -19,7 +19,7 @@ export default function Footer() {
                 <a href="mailto:varikliosala@gmail.com" className="hover:text-white transition-colors break-all">
                   varikliosala@gmail.com
                 </a>
-              </li>s
+              </li>
               <li>Kalno g. 83, Melekonių k, 14119 Melekonys</li>
             </ul>
           </div>
@@ -27,7 +27,7 @@ export default function Footer() {
             <h4 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Nuorodos</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="#apie-mus" className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors">
+                <Link href="/#apie-mus" className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors">
                   Apie mus
                 </Link>
               </li>
@@ -37,9 +37,9 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="#kontaktai" className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors">
+                <Link href="/#kontaktai" className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors">
                   Kontaktai
-                </a>
+                </Link>
               </li>
               <li>
                 <Link href="https://rekvizitai.vz.lt/imone/variklio_sala/" className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors">
@@ -51,7 +51,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-700 pt-6 sm:pt-8 text-center text-gray-400">
-          <p className="text-xs sm:text-sm">&copy; {currentYear} varikliosala.lt. Visos teisės saugomos.</p>
+          <p className="text-xs sm:text-sm">&copy; {currentYear} varikliosala.lt Visos teisės saugomos.</p>
         </div>
       </div>
     </footer>
