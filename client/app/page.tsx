@@ -11,10 +11,10 @@ export default async function HomePage() {
     <>
       <Header  />
       <main>
-        <section id="hero"><HeroSection /></section>
-        <section id="apie-mus"><AboutSection /></section>
-        <section id="paslaugos"><ServicesSection /></section>
-        <section id="kontaktai"><ContactSection /></section>
+        <section id="hero" className="scroll-mt-[120px]"><HeroSection /></section>
+        <section id="apie-mus" className="scroll-mt-[120px]"><AboutSection /></section>
+        <section id="paslaugos" className="scroll-mt-[120px]"><ServicesSection /></section>
+        <section id="kontaktai" className="scroll-mt-[120px]"><ContactSection /></section>
       </main>
       <PrivacyPolicy />
       <Footer />

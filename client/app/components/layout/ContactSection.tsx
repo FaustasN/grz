@@ -38,7 +38,7 @@ export default function ContactSection() {
   ];
 
   return (
-    <section id="#kontaktai" className="py-12 sm:py-16 md:py-20 px-4 bg-white scroll-mt-32 sm:scroll-mt-36">
+    <section id="#kontaktai" className="py-12 sm:py-16 md:py-20 px-4 bg-white scroll-mt-32 sm:scroll-mt-60">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-10 sm:mb-12 md:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-3 sm:mb-4">

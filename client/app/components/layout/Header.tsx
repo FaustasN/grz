@@ -10,7 +10,14 @@ export default function Header() {
       <div className="container mx-auto px-4 py-3 sm:py-4 flex justify-between items-center">
         <div className="flex items-center gap-3 ">
           <Link href="/">
-            <Image src="/transperent_logo.webp" alt="TireService Logo" width={150} height={150} />
+          <Image
+              src="/transperent_logo.webp"
+              alt="TireService Logo"
+              width={150}
+              height={150}
+              priority
+              sizes="(max-width: 640px) 120px, 150px"
+            />
           </Link>
         </div>
         <div className="flex items-center gap-3">
