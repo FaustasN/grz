@@ -10,9 +10,15 @@ import ReservationModal from '../../components/forms/ReservationModal';
 import ScrollToTop from '../../components/ui/ScrollToTop';  
 import { useScrollAnimation } from '../../components/utils/useScrollAnimation';
 import PrivacyPolicy from '../../components/forms/PrivacyPolicy';
+import { trackReservationButtonClick } from '../../components/utils/gtm';
   export default function SuspensionRepairPage() {
   const containerRef = useScrollAnimation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleReservationClick = () => {
+    trackReservationButtonClick('service_vaziuokles_remontas');
+    setIsModalOpen(true);
+  };
 
   return (
     <>
@@ -44,21 +50,35 @@ import PrivacyPolicy from '../../components/forms/PrivacyPolicy';
 
           <section className="mt-10 space-y-8 text-gray-700">
             <div className="space-y-3">
+              <p>Važiuoklės remontas Pagiriuose – tai paslauga, kuri reikalauja patirties ir tikslumo, nes
+              važiuoklė tiesiogiai lemia automobilio stabilumą, komfortą ir saugumą. Variklio Sala servise
+              atliekame visų važiuoklės elementų patikrą ir remontą: amortizatorių keitimą, trauklių,
+               šarnyrų, įvorių, stabilizatoriaus traukių, guolių ir kitų dalių keitimą.</p>
               <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">
               Kada reikėtų tvarkyti važiuoklę?
               </h2>
               <p className="text-sm sm:text-base leading-relaxed">
-              Jei pastebimi šie požymiai, tai aiškus signalas, kad automobilio važiuoklė nebėra tokios būklės, kokios turėtų būti. Automobilio drebėjimas arba neįprasti garsai gali rodyti pažeistas pakabos dalis ar išsibalansavusius ratus. 
-              Nestabilus vairas, sunkumas išlaikyti tiesią judėjimo kryptį arba nuolatinis „plaukiojimas“ kelyje dažniausiai susiję su susidėvėjusiomis vairo mechanizmo dalimis. 
-              Netolygiai susidevėjūsios padangos taip pat yra vienas ryškiausių požymių, kad važiuoklėje vyra bėdų. Tokie simptomai ne tik blogina važiavimo kokybę, bet ir didina riziką kelionės metu, todėl jų ignoruoti nepatartina.
+              Dažniausi požymiai, rodantys, kad važiuoklei reikia dėmesio: bildesiai, klaksėjimas, vairas
+             traukia į šoną, nelygus padangų nusidėvėjimas, automobilis „plaukioja“ važiuojant.
+                   Važiuoklė nuolat patiria apkrovas, todėl natūralu, kad dalys dėvisi greičiau, ypač važinėjant
+                 prastesniais keliais.
               </p>
+              <h3 className="text-2xl sm:text-3xl font-semibold text-gray-800">
+              Kuo išsiskiriame?
+              </h3>
+              <p className="text-sm sm:text-base leading-relaxed">Mūsų meistrai turi patirties dirbant tiek su ekonomiškais automobiliais, tiek su premium
+              klasės modeliais. Diagnozuojame ne tik gedimą, bet ir priežastį, kodėl jis atsirado, kad
+              ateityje būtų išvengta pakartotinių remonto darbų.
+              Važiuoklės remontas atliekamas operatyviai, naudojant tik patikimų gamintojų detales.
+              Galime derinti remonto darbus su 3D ratų suvedimu, kad automobilis būtų saugus ir
+              stabilus iškart po remonto.</p>
             </div>
           </section>
 
           <div className="mt-12 flex justify-center">
             <button
               type="button"
-              onClick={() => setIsModalOpen(true)}
+              onClick={handleReservationClick}
               className="flex items-center gap-2 sm:gap-3 bg-gray-800 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:bg-gray-700 transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl text-base sm:text-lg font-semibold"
             >
               Rezervuoti laiką
