@@ -10,9 +10,15 @@ import ReservationModal from '../../components/forms/ReservationModal';
 import ScrollToTop from '../../components/ui/ScrollToTop';
 import { useScrollAnimation } from '../../components/utils/useScrollAnimation';
 import PrivacyPolicy from '../../components/forms/PrivacyPolicy';
+import { trackReservationButtonClick } from '../../components/utils/gtm';
   export default function BrakeRepairPage() {
   const containerRef = useScrollAnimation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleReservationClick = () => {
+    trackReservationButtonClick('service_stabdziu_remontas');
+    setIsModalOpen(true);
+  };
 
   return (
     <>
@@ -44,13 +50,14 @@ import PrivacyPolicy from '../../components/forms/PrivacyPolicy';
 
           <section className="mt-10 space-y-8 text-gray-700">
             <div className="space-y-3">
-              <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">
+                  <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">
               Kodėl stabdžių priežiūra yra tokia svarbi?
               </h2>
               <p className="text-sm sm:text-base leading-relaxed">
-              Stabdžiai yra vienas iš pagrindinių Jūsų automobilio saugumo elementų. 
-              Jie užtikrina, kad transporto priemonė sustotų laiku ir saugiai, todėl jų tinkama priežiūra yra būtina kiekvienam vairuotojui. 
-              Sudilę stabdžių elementai gali ne tik sumažinti stabdymo efektyvumą, bet ir kelti pavojų Jūsų bei kitų eismo dalyvių saugumui.
+              Stabdžių sistema yra viena svarbiausių automobilio saugumo dalių, todėl stabdžių
+              remontas Pagiriuose atliekamas itin kruopščiai ir profesionaliai. Keičiame stabdžių
+              kaladėles, diskus, būgnus, suportus, rankinio stabdžio trosus, stabdžių žarneles ir
+              atliekame visos hidraulinės sistemos patikrą.
               </p>
             </div>
             <div className="space-y-3">
@@ -58,8 +65,14 @@ import PrivacyPolicy from '../../components/forms/PrivacyPolicy';
               Kada reikia keisti stabdžių kaladėles?
              </h3>
               <p className="text-sm sm:text-base leading-relaxed">
-              Kaladėlių dėvėjimą galima pastebėti pagal keletą požymių: kai stabdant girdisi neįprasti garsai, stabdymo kelias ilgėja arba vairas vibruoja stabdant.
-               Jei kaladėlės yra pernelyg sudilusios, jas būtina skubiai pakeisti, nes vėlavimas gali lemti didesnius gedimus, įskaitant stabdžių diskų pažeidimus.
+              Dažniausi simptomai, rodantys stabdžių problemas: cypimas, vibracija stabdant, ilgėjantis
+              stabdymo kelias, nuspaudus pedalą jis „krenta“, vairas vibruoja arba užsidega stabdžių
+              lemputės skydelyje. Tai rimti požymiai, kurių ignoruoti nevalia.
+              </p>
+              <p className="text-sm sm:text-base leading-relaxed">
+              Stabdžių remontas Variklio Sala servise padeda užtikrinti, kad automobilis būtų saugus
+              tiek mieste, tiek važiuojant didesniu greičiu. Nesvarbu, ar reikia pakeisti tik kaladėles, ar
+              atlikti pilną sistemos tvarkymą – viskuo pasirūpinsime.
               </p>
             </div>
           </section>
@@ -67,7 +80,7 @@ import PrivacyPolicy from '../../components/forms/PrivacyPolicy';
           <div className="mt-12 flex justify-center">
             <button
               type="button"
-              onClick={() => setIsModalOpen(true)}
+              onClick={handleReservationClick}
               className="flex items-center gap-2 sm:gap-3 bg-gray-800 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:bg-gray-700 transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl text-base sm:text-lg font-semibold"
             >
               Rezervuoti laiką

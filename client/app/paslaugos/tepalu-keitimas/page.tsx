@@ -10,9 +10,15 @@ import ReservationModal from '../../components/forms/ReservationModal';
 import ScrollToTop from '../../components/ui/ScrollToTop';  
 import { useScrollAnimation } from '../../components/utils/useScrollAnimation';
 import PrivacyPolicy from '../../components/forms/PrivacyPolicy';
+import { trackReservationButtonClick } from '../../components/utils/gtm';
     export default function OilChangePage() {
   const containerRef = useScrollAnimation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleReservationClick = () => {
+    trackReservationButtonClick('service_tepalu_keitimas');
+    setIsModalOpen(true);
+  };
       
   return (
     <>
@@ -48,10 +54,13 @@ import PrivacyPolicy from '../../components/forms/PrivacyPolicy';
               Kodėl tai būtina jūsų automobilio sveikatai?
               </h2>
               <p className="text-sm sm:text-base leading-relaxed">
-                Reguliarus tepalų keitimas yra viena svarbiausių automobilio priežiūros procedūrų. 
-                Variklis turi daugybę greitai judančių detalių, ir be tinkamo tepalo jos pradeda greitai dėvėtis. 
-                Kokybiški, laiku pakeisti tepalai sudaro apsauginį sluoksnį, mažina trintį ir saugo variklį nuo perkaitimo bei metalo dalių pažeidimų.
-                Būtent todėl ši paprasta procedūra tiesiogiai prailgina variklio tarnavimo laiką ir sumažina brangių remontų riziką.
+              Profesionalus tepalų keitimas Pagiriuose – būtina paslauga norint užtikrinti ilgesnį variklio
+              tarnavimo laiką ir sklandų automobilio darbą. Mūsų servise keičiame visų tipų alyvą:
+                sintetinę, pusiau sintetinę, ilgalaikę (LongLife) ir gamintojo rekomenduotą alyvą konkrečiai
+               markei.
+                 Tepalų keitimo metu pakeičiame ne tik variklio alyvą, bet ir alyvos filtrą, o esant poreikiui –
+                     oro, kuro ar salono filtrus. Profilaktiškai patikriname variklio sandarumą, aušinimo skysčio
+                 lygį, diržus ir automobilio būklę, kad klientas žinotų visą realią situaciją.
               </p>
             </div>
 
@@ -60,7 +69,12 @@ import PrivacyPolicy from '../../components/forms/PrivacyPolicy';
                Kada reikia keisti tepalus?
               </h3>
               <p className="text-sm sm:text-base leading-relaxed">
-              Dažniausiai tepalus rekomenduojama keisti kas 8-12 tūkst. kilometrų arba pagal gamintojo rekomendacijas.
+              Pasenusi alyva praranda tepamąsias savybes, didina trintį ir variklio nusidėvėjimą. Laiku
+             neatliktas keitimas gali sukelti rimtus ir brangius gedimus, įskaitant variklio užsikirtimą.
+             Rekomenduojame keisti kas 10 000–15 000 km arba kartą per metus.
+             Variklio Sala servisas užtikrina greitą ir kokybišką paslaugą – dažniausiai tai trunka vos
+             15–30 minučių. Naudojame tik patikimų gamintojų alyvą ir filtrus. Atvykite pasikeisti tepalų
+              Pagiriuose ir būkite ramūs, kad jūsų automobilio variklis dirbs sklandžiai.
               </p>
             </div>
 
@@ -69,7 +83,7 @@ import PrivacyPolicy from '../../components/forms/PrivacyPolicy';
           <div className="mt-12 flex justify-center">
             <button
               type="button"
-              onClick={() => setIsModalOpen(true)}
+              onClick={handleReservationClick}
               className="flex items-center gap-2 sm:gap-3 bg-gray-800 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:bg-gray-700 transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl text-base sm:text-lg font-semibold"
             >
               Rezervuoti laiką

@@ -10,9 +10,15 @@ import ReservationModal from '../../components/forms/ReservationModal';
 import ScrollToTop from '../../components/ui/ScrollToTop';
 import { useScrollAnimation } from '../../components/utils/useScrollAnimation';
 import PrivacyPolicy from '../../components/forms/PrivacyPolicy';
+import { trackReservationButtonClick } from '../../components/utils/gtm';
 export default function BodyRepairPage() {
   const containerRef = useScrollAnimation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleReservationClick = () => {
+    trackReservationButtonClick('service_kebulo_remontas');
+    setIsModalOpen(true);
+  };
 
   return (
     <>
@@ -74,7 +80,7 @@ export default function BodyRepairPage() {
           <div className="mt-12 flex justify-center">
             <button
               type="button"
-              onClick={() => setIsModalOpen(true)}
+              onClick={handleReservationClick}
               className="flex items-center gap-2 sm:gap-3 bg-gray-800 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:bg-gray-700 transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl text-base sm:text-lg font-semibold"
             >
               Rezervuoti laiką

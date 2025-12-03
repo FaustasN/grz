@@ -5,19 +5,27 @@ import Header from '../../components/layout/Header';
 import Footer from '../../components/layout/Footer';
 import Image from 'next/image';
 import { getServiceImage } from '../../components/utils/servicesConfig';
-import Head from 'next/head';
 import ReservationModal from '../../components/forms/ReservationModal';
 import ScrollToTop from '../../components/ui/ScrollToTop';
 import { useScrollAnimation } from '../../components/utils/useScrollAnimation';
 import PrivacyPolicy from '../../components/forms/PrivacyPolicy';
-    export default function WheelAlignmentPage() {
-  const containerRef = useScrollAnimation();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+import Head from 'next/head';
+import { trackReservationButtonClick } from '../../components/utils/gtm';
+
+
+export default function WheelAlignmentPage() {
+         const containerRef = useScrollAnimation();
+         const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleReservationClick = () => {
+    trackReservationButtonClick('service_3d_ratu_suvedimas');
+    setIsModalOpen(true);
+  };
   return (
     <>
     <Head>
-    <title>3D ratų suvedimas | Variklio sala</title>
-    <meta name="description" content="3D ratų suvedimas yra svarbus, nes jis gali pagerinti važiavimo kokybę ir sumažinti riziką kelionės metu. "/>
+    <title>3D ratų suvedimas | Automobilių servisas Pagiriuose</title>
+    <meta name="description" content="Šiame puslapyje aprašoma 3D ratų suvedimo paslauga, kuri atliekama su modernia įranga, kuri leidžia tiksliai sureguliuoti ratų geometriją pagal gamintojo parametrus."/>
     </Head>
       <Header />
       <main className="pt-40 pb-20 px-4 bg-gray-50" ref={containerRef as React.RefObject<HTMLElement>}>
@@ -43,22 +51,32 @@ import PrivacyPolicy from '../../components/forms/PrivacyPolicy';
 
           <section className="mt-10 space-y-8 text-gray-700">
             <div className="space-y-3">
+              <p> 3D ratų suvedimas Pagiriuose atliekamas su modernia įranga,
+                 kuri leidžia tiksliai sureguliuoti ratų geometriją pagal gamintojo parametrus.
+                  Taisyklingi ratų kampai užtikrina saugų vairavimą, mažesnį padangų dėvėjimąsi 
+                  ir stabilų automobilio valdymą bet kokiu greičiu.</p>
               <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">
               Kada reikėtų atlikti ratų suvedimą?
               </h2>
               <p className="text-sm sm:text-base leading-relaxed">
-              Ratų suvedimą rekomenduojama atlikti kas 15–20 tūkst. kilometrų arba tada, kai pastebimi aiškūs vairo geometrijos pokyčiai. 
-              Dažnas važiavimas per duobes, bordiūrus ar nelygius kelius, suvedimą išderina greičiau, todėl suvedimo reikia anksčiau.
+              Netaisyklinga geometrija dažnai pasireiškia trauka į vieną pusę, vibruojančiu vairu, greitu
+              padangų nusidėvėjimu arba nestabilumu važiuojant nelygiu keliu. Daugelis vairuotojų
+               nesupranta, kad net menkas smūgis į duobę ar bordiūrą gali pakeisti ratų kampus ir
+             pabloginti valdymą.
               </p>
             </div>
 
             <div className="space-y-3">
               <h3 className="text-xl sm:text-2xl font-semibold text-gray-800">
-              Pagrindiniai požymiai, kad jums reikia suvedimo
+              Ką atliekame suvedimo metu?
               </h3>
               <p className="text-sm sm:text-base leading-relaxed">
-              Automobilis pradeda krypti į vieną šoną, padangos dėvisi netolygiai, vairas tampa „laisvesnis“ ar automobilis posūkiuose reaguoja ne taip tiksliai, kaip turėtų. 
-              Esant šiems simptomams suvedimas atliekamas nedelsiant, kad būtų išvengta tolesnio padangų ir pakabos detalių dėvėjimosi.
+              Patikriname priekinių ir galinių ratų kampus, sureguliuojame suvedimą, išvirtimą, caster
+              kampą, vairo centravimą. Po procedūros pateikiame aiškią ataskaitą, kurioje matosi
+              sustatyti parametrai „prieš ir po“. 
+              Mūsų servise 3D ratų suvedimas yra greitas, tikslus ir atliekamas naudojant patikimą,
+              sertifikuotą įrangą. Tai viena svarbiausių paslaugų norint užtikrinti saugų ir komfortišką
+              vairavimą Pagiriuose ir Vilniaus rajone.
               </p>
             </div>
 
@@ -67,7 +85,7 @@ import PrivacyPolicy from '../../components/forms/PrivacyPolicy';
           <div className="mt-12 flex justify-center">
             <button
               type="button"
-              onClick={() => setIsModalOpen(true)}
+              onClick={handleReservationClick}
               className="flex items-center gap-2 sm:gap-3 bg-gray-800 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:bg-gray-700 transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl text-base sm:text-lg font-semibold"
             >
               Rezervuoti laiką
