@@ -23,11 +23,8 @@ export default function ArticlesPage() {
 
           {articles.length === 0 ? (
             <div className="text-center py-16 sm:py-20">
-              <p className="text-lg sm:text-xl text-gray-600 mb-4">
-                Straipsniai bus pridėti netrukus
-              </p>
               <p className="text-sm sm:text-base text-gray-500">
-                Grįžkite vėliau, kad perskaitytumėte naudingus straipsnius apie automobilių priežiūrą ir remontą
+                Grįžkite vėliau, kad galėtumėte perskaityti naudingus straipsnius apie automobilių priežiūrą ir remontą
               </p>
             </div>
           ) : (
