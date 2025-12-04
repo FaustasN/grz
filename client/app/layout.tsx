@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { GoogleTagManager } from '@next/third-parties/google';
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata: Metadata = {
   title: "Automobilių servisas Pagiriuose | Remontas, diagnostika, 3D suvedimas",
@@ -18,8 +19,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="lt">
+    <html>
       <body className="antialiased bg-white text-gray-900">{children}</body>
+      <GoogleAnalytics gaId="G-0DJ6YGFNRF" />
       <GoogleTagManager gtmId="GTM-KWVPNDHR" />
     </html>
   );
