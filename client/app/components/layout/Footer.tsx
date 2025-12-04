@@ -42,6 +42,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/straipsniai" className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors">
+                  Straipsniai
+                </Link>
+              </li>
+              <li>
                 <Link href="https://rekvizitai.vz.lt/imone/variklio_sala/" className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors">
                   Rekvizitai
                 </Link>
