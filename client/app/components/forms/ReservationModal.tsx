@@ -308,15 +308,15 @@ export default function ReservationModal({ isOpen, onClose, onSuccess, initialSe
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto">
+    <div className="fixed inset-0 z-50 overflow-y-auto animate-[fadeIn_0.3s_ease-out]">
       <div 
-        className="fixed inset-0 bg-black/50 transition-opacity backdrop-blur-sm"
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm"
         onClick={handleClose}
       />
 
-      <div className="relative flex min-h-full items-center justify-center p-4 pointer-events-none">
+      <div className="relative flex min-h-screen items-center justify-center p-4 pointer-events-none">
         <div 
-          className="relative bg-white rounded-2xl shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto custom-scrollbar animate-slide-up pointer-events-auto mx-auto"
+          className="relative bg-white rounded-2xl shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto custom-scrollbar pointer-events-auto animate-[fadeInUp_0.3s_ease-out]"
           onClick={(e) => e.stopPropagation()}
           style={{ scrollbarGutter: 'stable' }}
         >
