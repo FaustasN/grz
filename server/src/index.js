@@ -136,7 +136,7 @@ app.use('/uploads', express.static(join(__dirname, '..', 'uploads')));
 
 app.use((req, res, next) => {
 
-  res.header('Access-Control-Allow-Origin', 'varikliosala.lt');
+  res.header('Access-Control-Allow-Origin', 'https://www.varikliosala.lt');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   
