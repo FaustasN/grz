@@ -29,3 +29,11 @@ export const trackReservationButtonClick = (context: string) => {
     timestamp: Date.now(),
   });
 };
+
+export const trackContactFormSubmit = (context?: string) => {
+  pushToDataLayer('contact_form_submit', {
+    context: context || 'contact_form',
+    page_path: typeof window !== 'undefined' ? window.location.pathname : undefined,
+    timestamp: Date.now(),
+  });
+};

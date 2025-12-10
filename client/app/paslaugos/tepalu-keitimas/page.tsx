@@ -6,7 +6,7 @@ import Footer from '../../components/layout/Footer';
 import Image from 'next/image';
 import { getServiceImage } from '../../components/utils/servicesConfig';
 import Head from 'next/head';
-import ReservationModal from '../../components/forms/ReservationModal';
+import ContactFormModal from '../../components/forms/contactform';
 import ScrollToTop from '../../components/ui/ScrollToTop';  
 import { useScrollAnimation } from '../../components/utils/useScrollAnimation';
 import PrivacyPolicy from '../../components/forms/PrivacyPolicy';
@@ -15,7 +15,7 @@ import { trackReservationButtonClick } from '../../components/utils/gtm';
   const containerRef = useScrollAnimation();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleReservationClick = () => {
+  const handleContactClick = () => {
     trackReservationButtonClick('service_tepalu_keitimas');
     setIsModalOpen(true);
   };
@@ -83,17 +83,17 @@ import { trackReservationButtonClick } from '../../components/utils/gtm';
           <div className="mt-12 flex justify-center">
             <button
               type="button"
-              onClick={handleReservationClick}
+              onClick={handleContactClick}
               className="flex items-center gap-2 sm:gap-3 bg-gray-800 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:bg-gray-700 transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl text-base sm:text-lg font-semibold"
             >
-              Rezervuoti laiką
+             Susisiekite
             </button>
           </div>
         </div>
         <PrivacyPolicy />
       </main>
       <Footer />
-      <ReservationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <ContactFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <ScrollToTop />
       </>
   );

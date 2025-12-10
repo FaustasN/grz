@@ -12,6 +12,7 @@ export const API_ENDPOINTS = {
     GET_BY_ID: (id: number) => `${API_BASE_URL}/api/reservations/${id}`,
     UPDATE: (id: number) => `${API_BASE_URL}/api/reservations/${id}`,
     DELETE: (id: number) => `${API_BASE_URL}/api/reservations/${id}`,
+    CONTACT: `${API_BASE_URL}/api/reservations/contact`,
   },
   PHOTOS: {
     UPLOAD: (type: 'before' | 'after') => `${API_BASE_URL}/api/photos/${type}`,

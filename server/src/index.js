@@ -85,34 +85,6 @@ function getVilniusTimeWithOffset(offsetMinutes) {
   return formatSQLiteDate(targetDate);
 }
 
-function logAllReservationsDebug() {
-  try {
-    const query = `
-      SELECT id, name, email, phone, reservation_date, service_type, reminder_sent
-      FROM reservations
-      ORDER BY reservation_date ASC
-    `;
-    const reservations = db.prepare(query).all();
-
-    console.log('📋 [DEBUG] Visų rezervacijų sąrašas:');
-    if (reservations.length === 0) {
-      console.log('📋 [DEBUG]   - Nėra įrašų rezervacijų lentelėje');
-      return;
-    }
-
-    for (const reservation of reservations) {
-      console.log(`📋 [DEBUG]   - #${reservation.id} | ${reservation.reservation_date} | ${reservation.service_type} | ${reservation.name} | reminder_sent=${reservation.reminder_sent}`);
-    }
-  } catch (error) {
-    if (error.message && error.message.includes('no such table')) {
-      console.warn('📋 [DEBUG] Lentelė "reservations" nerasta – praleidžiamas rezervacijų logavimas.');
-      return;
-    }
-
-    console.error('📋 [DEBUG] Klaida bandant išvesti visas rezervacijas:', error.message);
-    console.error('📋 [DEBUG] Visos klaidos detalės:', JSON.stringify(error, null, 2));
-  }
-}
 
 
 const app = express();
@@ -164,7 +136,7 @@ app.use('/uploads', express.static(join(__dirname, '..', 'uploads')));
 
 app.use((req, res, next) => {
 
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', 'varikliosala.lt');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   
@@ -218,17 +190,8 @@ setInterval(cleanupOldReservations, 86400000);
 
 
 async function sendReminderEmails(invocationDate = new Date()) {
-  const invocationIso = invocationDate.toISOString();
-  console.log(`\n📧 [DEBUG] sendReminderEmails funkcija paleista: ${invocationIso}`);
-
-  logAllReservationsDebug();
-
   try {
     const { minTime, maxTime } = getReminderWindow(invocationDate);
-
-    console.log(`📧 [DEBUG] Ieškoma rezervacijų, kurios prasideda per ${REMINDER_WINDOW_MINUTES.min}-${REMINDER_WINDOW_MINUTES.max} minučių`);
-    console.log(`📧 [DEBUG] Min laikas (Vilnius): ${minTime}`);
-    console.log(`📧 [DEBUG] Max laikas (Vilnius): ${maxTime}`);
 
     const reminderQuery = `
       SELECT id, name, email, phone, reservation_date, service_type
@@ -243,16 +206,12 @@ async function sendReminderEmails(invocationDate = new Date()) {
       reservations = db.prepare(reminderQuery).all(minTime, maxTime);
     } catch (dbError) {
       if (dbError.message && dbError.message.includes('no such table')) {
-        console.warn('📧 [DEBUG] Lentelė "reservations" dar nesukurta – priminimai praleidžiami.');
         return;
       }
       throw dbError;
     }
 
-    console.log(`📧 [DEBUG] Rasta rezervacijų: ${reservations.length}`);
-
     if (reservations.length === 0) {
-      console.log('📧 [DEBUG] Nėra rezervacijų, kurioms reikia siųsti priminimus');
       return;
     }
 
@@ -682,7 +641,7 @@ app.post('/api/reservations', async (req, res) => {
     
     transporter.sendMail({
       from: process.env.EMAIL_USER,
-      to: "noreikafaustas@gmail.com",
+      to: "varikliosala@gmail.com",
       subject: `Nauja rezervacija: ${service_type}`,
       text: `Nauja rezervacija:\n\nVardas: ${name}\nTelefonas: ${phone}\nData ir laikas: ${reservation_date}\nPaslauga: ${service_type}\nPapildoma informacija: ${additional_info || 'Nėra papildomos informacijos'}`
     }).catch(emailError => {
@@ -731,6 +690,37 @@ app.delete('/api/reservations/:id', authenticateToken, async (req, res) => {
     });
   }
 });
+app.post('/api/reservations/contact', async (req, res) => {
+  const { name, phone } = req.body;
+  
+  if (!name || !phone) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Vardas ir telefono numeris yra privalomi' 
+    });
+  }
+
+  try {
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: "varikliosala@gmail.com",
+      subject: `Nauja kontaktinė užklausa`,
+      text: `Nauja kontaktinė užklausa:\n\nVardas: ${name}\nTelefonas: ${phone}`
+    });
+
+    res.status(200).json({ 
+      success: true, 
+      message: 'Užklausa sėkmingai išsiųsta' 
+    });
+  } catch (error) {
+    console.error('Error sending contact email:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Nepavyko išsiųsti užklausos. Prašome bandyti vėliau.',
+      error: error.message 
+    });
+  }
+});
 
 app.use((error, req, res, next) => {
   if (error instanceof multer.MulterError) {
@@ -747,6 +737,4 @@ app.use((error, req, res, next) => {
 
 app.listen(PORT, () => {
   const vilniusTime = getVilniusTime();
-  console.log(`Server is running on http://localhost:${PORT}`);
-  console.log(`🕐 Dabartinis Vilniaus laikas: ${vilniusTime}`);
 });
