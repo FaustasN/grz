@@ -4,7 +4,6 @@ import { useScrollAnimation } from '../components/utils/useScrollAnimation';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import Link from 'next/link';
-import Head from 'next/head';
 import Image from 'next/image';
 import { getServiceImage } from '../components/utils/servicesConfig';
 import ScrollToTop from '../components/ui/ScrollToTop';
@@ -14,11 +13,6 @@ export default function ServicesPage() {
   const containerRef = useScrollAnimation();
   return (
     <>
-    <Head>
-    <title>Paslaugos | Variklio sala</title>
-    <meta name="description" content="Pilnas teikiamų paslaugų spektras jūsų automobiliui: diagnostika, stabdžių remontas, pakabos remontas, ratų suvedimas ir balansavimas, važiuoklės remontas, kėbulų remontas"/>
-   
-    </Head>
       <Header />
       <main className="pt-40 pb-20 px-4 bg-gray-50" ref={containerRef as React.RefObject<HTMLElement>}>
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-800 mb-8 sm:mb-10 text-center">

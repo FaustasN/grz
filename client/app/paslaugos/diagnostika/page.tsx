@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Header from '../../components/layout/Header';
 import Footer from '../../components/layout/Footer';
 import Image from 'next/image';
-import Head from 'next/head';
 import { getServiceImage } from '../../components/utils/servicesConfig';
 import ContactFormModal from '../../components/forms/contactform';
 import ScrollToTop from '../../components/ui/ScrollToTop';
@@ -21,10 +20,6 @@ export default function DiagnosticsPage() {
   };
   return (
     <>
-    <Head>
-    <title>Kompiuterinė diagnostika | Variklio sala</title>
-    <meta name="description" content="Kompiuterinė diagnostika yra svarbi, nes ji gali aptikti automobilio techninius gedimus, kurie gali būti sunkiai pastebimi žmogaus akimi. Kompiuterinė diagnostika gali būti naudojama aptikti variklio gedimus, transmisijos gedimus, stabdžių gedimus, vairo gedimus ir kitus techninius gedimus."/>
-    </Head>
       <Header />
       <main className="pt-40 pb-20 px-4 bg-gray-50" ref={containerRef as React.RefObject<HTMLElement>}>
         <div className="container mx-auto max-w-4xl">

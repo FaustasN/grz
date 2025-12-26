@@ -5,7 +5,6 @@ import Header from '../../components/layout/Header';
 import Footer from '../../components/layout/Footer';
 import Image from 'next/image';
 import { getServiceImage } from '../../components/utils/servicesConfig';
-import Head from 'next/head';
 import ContactFormModal from '../../components/forms/contactform';
 import ScrollToTop from '../../components/ui/ScrollToTop';
 import { useScrollAnimation } from '../../components/utils/useScrollAnimation';
@@ -21,10 +20,6 @@ export default function HeadlightRepairPage() {
   };
   return (
     <>
-    <Head>
-    <title>Žibintų remontas | Variklio sala</title>
-    <meta name="description" content="Žibintų reguliavimas yra svarbus, nes jis gali pagerinti automobilio matomumą ir sumažinti riziką kelionės metu."/>
-    </Head>
       <Header />
       <main className="pt-40 pb-20 px-4 bg-gray-50" ref={containerRef as React.RefObject<HTMLElement>}>
         <div className="container mx-auto max-w-4xl">
