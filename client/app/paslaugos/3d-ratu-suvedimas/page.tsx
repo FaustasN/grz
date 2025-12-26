@@ -9,7 +9,6 @@ import ContactFormModal from '../../components/forms/contactform';
 import ScrollToTop from '../../components/ui/ScrollToTop';
 import { useScrollAnimation } from '../../components/utils/useScrollAnimation';
 import PrivacyPolicy from '../../components/forms/PrivacyPolicy';
-import Head from 'next/head';
 import { trackReservationButtonClick } from '../../components/utils/gtm';
 
 
@@ -23,10 +22,6 @@ export default function WheelAlignmentPage() {
   };
   return (
     <>
-    <Head>
-    <title>3D ratų suvedimas | Automobilių servisas Pagiriuose</title>
-    <meta name="description" content="Šiame puslapyje aprašoma 3D ratų suvedimo paslauga, kuri atliekama su modernia įranga, kuri leidžia tiksliai sureguliuoti ratų geometriją pagal gamintojo parametrus."/>
-    </Head>
       <Header />
       <main className="pt-40 pb-20 px-4 bg-gray-50" ref={containerRef as React.RefObject<HTMLElement>}>
         <div className="container mx-auto max-w-4xl">

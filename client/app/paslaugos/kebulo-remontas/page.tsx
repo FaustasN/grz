@@ -5,7 +5,6 @@ import Header from '../../components/layout/Header';
 import Footer from '../../components/layout/Footer';
 import Image from 'next/image';
 import { getServiceImage } from '../../components/utils/servicesConfig';
-import Head from 'next/head';
 import ContactFormModal from '../../components/forms/contactform';
 import ScrollToTop from '../../components/ui/ScrollToTop';
 import { useScrollAnimation } from '../../components/utils/useScrollAnimation';
@@ -22,10 +21,6 @@ export default function BodyRepairPage() {
 
   return (
     <>
-    <Head>
-    <title>Kėbulų remontas / „Meninis lyginimas“ | Variklio sala</title>
-    <meta name="description" content="Kėbulų remontas / „Meninis lyginimas“ yra svarbus, ne ši procedūra efektyviai atkuria kėbulo paviršių, neprarandant automobilio vertės."/>
-    </Head>
       <Header />
       <main className="pt-40 pb-20 px-4 bg-gray-50" ref={containerRef as React.RefObject<HTMLElement>}>
         <div className="container mx-auto max-w-4xl">
@@ -33,7 +28,7 @@ export default function BodyRepairPage() {
             <div className="relative rounded-2xl overflow-hidden aspect-[16/9] max-w-3xl mx-auto shadow-lg">
               <Image
                 src={getServiceImage('body-repair')}
-                alt="Kėbulų remontas / „Meninis lyginimas“"
+                alt="Kėbulų remontas / Meninis lyginimas"
                 fill
                 priority
                 sizes="(max-width: 768px) 100vw, 768px"
@@ -42,7 +37,7 @@ export default function BodyRepairPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/10" />
               <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 z-10">
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white drop-shadow-lg">
-                  Kėbulų remontas / „Meninis lyginimas“
+                  Kėbulų remontas / Meninis lyginimas"
                 </h1>
               </div>
             </div>
@@ -95,4 +90,3 @@ export default function BodyRepairPage() {
     </>
   );
 }
-
