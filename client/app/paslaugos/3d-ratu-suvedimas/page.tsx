@@ -46,7 +46,7 @@ export default function WheelAlignmentPage() {
 
           <section className="mt-10 space-y-8 text-gray-700">
             <div className="space-y-3">
-              <p> 3D ratų suvedimas Pagiriuose atliekamas su modernia įranga,
+              <p> 3D ratų suvedimas Vaidotuose atliekamas su modernia įranga,
                  kuri leidžia tiksliai sureguliuoti ratų geometriją pagal gamintojo parametrus.
                   Taisyklingi ratų kampai užtikrina saugų vairavimą, mažesnį padangų dėvėjimąsi 
                   ir stabilų automobilio valdymą bet kokiu greičiu.</p>
@@ -71,7 +71,7 @@ export default function WheelAlignmentPage() {
               sustatyti parametrai „prieš ir po“. 
               Mūsų servise 3D ratų suvedimas yra greitas, tikslus ir atliekamas naudojant patikimą,
               sertifikuotą įrangą. Tai viena svarbiausių paslaugų norint užtikrinti saugų ir komfortišką
-              vairavimą Pagiriuose ir Vilniaus rajone.
+              vairavimą Vaidotuose ir Vilniaus rajone.
               </p>
             </div>
 

@@ -13,9 +13,9 @@ export default function TimePicker({ selectedTime, onTimeSelect, reservedTimes =
   const getInitialTime = () => {
     if (selectedTime) {
       const [h, m] = selectedTime.split(':');
-      return { hours: h || '10', minutes: m || '00' };
+      return { hours: h || '09', minutes: m || '00' };
     }
-    return { hours: '10', minutes: '00' };
+    return { hours: '09', minutes: '00' };
   };
   
   const [hours, setHours] = useState(() => getInitialTime().hours);
@@ -25,14 +25,14 @@ export default function TimePicker({ selectedTime, onTimeSelect, reservedTimes =
     if (selectedTime) {
       const [h, m] = selectedTime.split(':');
       queueMicrotask(() => {
-        setHours(h || '10');
+        setHours(h || '09');
         setMinutes(m || '00');
       });
     }
   }, [selectedTime]);
 
-  const workingHours = Array.from({ length: 10 }, (_, i) => {
-    const hour = i + 10;
+  const workingHours = Array.from({ length: 11 }, (_, i) => {
+    const hour = i + 9;
     return hour.toString().padStart(2, '0');
   });
 

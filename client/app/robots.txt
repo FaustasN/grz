@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Disallow: /admin/
-Sitemap: https://varikliosala.lt/sitemap.xml
+Sitemap: https://autovaldika.lt/sitemap.xml

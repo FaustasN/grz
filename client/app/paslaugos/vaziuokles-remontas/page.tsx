@@ -45,8 +45,8 @@ import { trackReservationButtonClick } from '../../components/utils/gtm';
 
           <section className="mt-10 space-y-8 text-gray-700">
             <div className="space-y-3">
-              <p>Važiuoklės remontas Pagiriuose – tai paslauga, kuri reikalauja patirties ir tikslumo, nes
-              važiuoklė tiesiogiai lemia automobilio stabilumą, komfortą ir saugumą. Variklio Sala servise
+              <p>Važiuoklės remontas Vaidotuose – tai paslauga, kuri reikalauja patirties ir tikslumo, nes
+              važiuoklė tiesiogiai lemia automobilio stabilumą, komfortą ir saugumą. Autovaldika servise
               atliekame visų važiuoklės elementų patikrą ir remontą: amortizatorių keitimą, trauklių,
                šarnyrų, įvorių, stabilizatoriaus traukių, guolių ir kitų dalių keitimą.</p>
               <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">

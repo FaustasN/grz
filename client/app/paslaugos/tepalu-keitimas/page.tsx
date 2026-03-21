@@ -49,13 +49,7 @@ import { trackReservationButtonClick } from '../../components/utils/gtm';
               Kodėl tai būtina jūsų automobilio sveikatai?
               </h2>
               <p className="text-sm sm:text-base leading-relaxed">
-              Profesionalus tepalų keitimas Pagiriuose – būtina paslauga norint užtikrinti ilgesnį variklio
-              tarnavimo laiką ir sklandų automobilio darbą. Mūsų servise keičiame visų tipų alyvą:
-                sintetinę, pusiau sintetinę, ilgalaikę (LongLife) ir gamintojo rekomenduotą alyvą konkrečiai
-               markei.
-                 Tepalų keitimo metu pakeičiame ne tik variklio alyvą, bet ir alyvos filtrą, o esant poreikiui –
-                     oro, kuro ar salono filtrus. Profilaktiškai patikriname variklio sandarumą, aušinimo skysčio
-                 lygį, diržus ir automobilio būklę, kad klientas žinotų visą realią situaciją.
+                Profesionalus tepalų keitimas Vaidotuose – būtina paslauga norint užtikrinti ilgesnį variklio tarnavimo laiką ir sklandų automobilio darbą. Mūsų servise keičiame visų tipų alyvą: sintetinę, pusiau sintetinę, ilgalaikę (LongLife) ir gamintojo rekomenduotą alyvą konkrečiai markei. Tepalų keitimo metu pakeičiame ne tik variklio alyvą, bet ir alyvos filtrą, o esant poreikiui – oro, kuro ar salono filtrus. Profilaktiškai patikriname variklio sandarumą, aušinimo skysčio lygį, diržus ir automobilio būklę, kad klientas žinotų visą realią situaciją.
               </p>
             </div>
 
@@ -64,12 +58,7 @@ import { trackReservationButtonClick } from '../../components/utils/gtm';
                Kada reikia keisti tepalus?
               </h3>
               <p className="text-sm sm:text-base leading-relaxed">
-              Pasenusi alyva praranda tepamąsias savybes, didina trintį ir variklio nusidėvėjimą. Laiku
-             neatliktas keitimas gali sukelti rimtus ir brangius gedimus, įskaitant variklio užsikirtimą.
-             Rekomenduojame keisti kas 10 000–15 000 km arba kartą per metus.
-             Variklio Sala servisas užtikrina greitą ir kokybišką paslaugą – dažniausiai tai trunka vos
-             15–30 minučių. Naudojame tik patikimų gamintojų alyvą ir filtrus. Atvykite pasikeisti tepalų
-              Pagiriuose ir būkite ramūs, kad jūsų automobilio variklis dirbs sklandžiai.
+                Pasenusi alyva praranda tepamąsias savybes, didina trintį ir variklio nusidėvėjimą. Laiku neatliktas keitimas gali sukelti rimtus ir brangius gedimus, įskaitant variklio užsikirtimą. Rekomenduojame keisti kas 10 000–15 000 km arba kartą per metus. Autovaldika servisas užtikrina greitą ir kokybišką paslaugą – dažniausiai tai trunka vos 15–30 minučių. Naudojame tik patikimų gamintojų alyvą ir filtrus. Atvykite pasikeisti tepalų Vaidotuose ir būkite ramūs, kad jūsų automobilio variklis dirbs sklandžiai.
               </p>
             </div>
 

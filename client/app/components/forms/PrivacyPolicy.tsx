@@ -35,9 +35,9 @@ export default function PrivacyPolicy() {
     {
       title: '1. Duomenų valdytojas',
       items: [
-        'El. paštas: varikliosala@gmail.com',
-        'Telefonas: +370 624 44 062',
-        'Adresas: Kalno g. 83, Melekonių k, 14119 Melekonys'
+        'El. paštas: autovaldika@gmail.com',
+        'Telefonas: +370 618 81791',
+        'Adresas: Jaunystės g. 11A, LT-02236 Vilnius'
       ]
     },
     {
