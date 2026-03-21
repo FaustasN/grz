@@ -15,8 +15,8 @@ export default function ServicesPage() {
     <>
       <Header />
       <main className="pt-40 pb-20 px-4 bg-gray-50" ref={containerRef as React.RefObject<HTMLElement>}>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-800 mb-8 sm:mb-10 text-center">
-          Visos teikiamos paslaugos
+        <h1 className="md:text-6xl font-bold text-gray-800 mb-8 sm:mb-10 text-center">
+          Visos autovaldika teikiamos paslaugos
         </h1>
       <div className="container mx-auto max-w-6xl">
       <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3">
@@ -173,7 +173,7 @@ export default function ServicesPage() {
             </div>
           </Link>
           <a
-            href="tel:+37068513131"
+            href="tel:+37061881791"
             className="block w-full scroll-animate scroll-animate-delay-200"
           >
             <div className="relative rounded-2xl overflow-hidden transition-all duration-300 group hover:shadow-2xl hover:-translate-y-1 cursor-pointer aspect-[16/9] min-h-[170px] sm:min-h-[210px]">

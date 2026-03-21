@@ -8,7 +8,7 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm transition-all duration-300">
       <div className="container mx-auto px-4 py-3 sm:py-4 flex justify-between items-center">
-        <div className="flex items-center gap-3 ">
+        <div className="flex items-center gap-3">
           <Link href="/">
           <Image
               src="/transperent_logo.webp"
@@ -17,12 +17,13 @@ export default function Header() {
               height={150}
               priority
               sizes="(max-width: 640px) 120px, 150px"
+              
             />
           </Link>
         </div>
         <div className="flex items-center gap-3">
           <Link
-            href="https://www.facebook.com/p/Variklio-sala-61581165962744/"
+            href="https://www.facebook.com/profile.php?id=100065069947682#"
             target="_blank"
             rel="noopener noreferrer"
             className="flex h-10 sm:h-11 items-center justify-center bg-gray-800 text-white px-3 sm:px-4 rounded-lg hover:bg-gray-700 transition-all duration-300 hover:scale-105 active:scale-95 shadow-md"
@@ -38,7 +39,7 @@ export default function Header() {
             </svg>
           </Link>
           <Link
-            href="tel:+37062444062"
+            href="tel:+37061881791"
             className="flex h-10 sm:h-11 items-center gap-2 bg-gray-800 text-white px-4 sm:px-6 rounded-lg hover:bg-gray-700 transition-all duration-300 hover:scale-105 active:scale-95 shadow-md text-sm sm:text-base font-semibold"
           >
             <Phone size={18} className="sm:hidden" />

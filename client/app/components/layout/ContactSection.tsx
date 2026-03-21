@@ -14,25 +14,25 @@ export default function ContactSection() {
     {
       icon: Phone,
       label: 'Telefonas',
-      value: '+370 624 44 062',
-      href: 'tel:+37062444062'
+      value: '+370 618 81791',
+      href: 'tel:+370 618 81791'
     },
     {
       icon: Mail,
       label: 'El. paštas',
-      value: 'varikliosala@gmail.com',
-      href: 'mailto:varikliosala@gmail.com'
+      value: 'autovaldika@gmail.com',
+      href: 'mailto:autovaldika@gmail.com'
     },
     {
       icon: MapPin,
       label: 'Adresas',
-      value: 'Kalno g. 83, Melekonių k, 14119 Melekonys',
-      href: 'https://www.google.com/maps/place/Kalno+g.+83,+Melekoni%C5%B3+k.,+14119+Vilniaus+r.+sav./@54.5678119,25.2085306,17z/data=!3m1!4b1!4m6!3m5!1s0x46ddebac38c8f489:0x6e12249e592b92a4!8m2!3d54.5678119!4d25.2111055!16s%2Fg%2F11s7y_vsj0?entry=ttu&g_ep=EgoyMDI1MTAxNC4wIKXMDSoASAFQAw%3D%3D'
+      value: 'Jaunystės g. 11A, LT-02236 Vilnius ',
+      href: 'https://maps.app.goo.gl/MfJG2W5B3ZYPL31B6'
     },
     {
       icon: Clock,
       label: 'Darbo laikas',
-      value: 'Pr-Pt: 10:00-20:00, Še: 9:00-15:00',
+      value: 'Pr-Sekm: 09:00-19:00',
       href: null
     }
   ];
@@ -82,7 +82,7 @@ export default function ContactSection() {
 
           <div className="rounded-2xl overflow-hidden shadow-xl h-[300px] sm:h-[400px] lg:h-auto lg:min-h-[500px]">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2302.817!2d25.2085306!3d54.5678119!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46ddebac38c8f489%3A0x6e12249e592b92a4!2sKalno%20g.%2083%2C%20Melekoni%C5%B3%20k.%2C%2014119%20Vilniaus%20r.%20sav.!5e0!3m2!1slt!2slt!4v1729350000000!5m2!1slt!2slt"
+              src="https://www.google.com/maps?q=Jaunyst%C4%97s+g.+11A%2C+Vilnius+LT-02236&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0 }}

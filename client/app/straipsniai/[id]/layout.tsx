@@ -11,14 +11,14 @@ export async function generateMetadata({
 
   if (!article) {
     return {
-      title: "Straipsnis nerastas | Automobilių servisas Pagiriuose",
+      title: "Straipsnis nerastas | Automobilių servisas Vaidotuose",
       description: "Atsiprašome, bet šis straipsnis neegzistuoja.",
       robots: "noindex, nofollow",
     };
   }
 
   return {
-    title: `${article.title} | Automobilių servisas Pagiriuose`,
+    title: `${article.title} | Automobilių servisas Vaidotuose`,
     description: article.excerpt,
     keywords: "automobilių straipsniai, priežiūros patarimai, remonto gidai",
     robots: "index, follow",

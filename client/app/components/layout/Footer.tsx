@@ -11,16 +11,16 @@ export default function Footer() {
             <h4 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Kontaktai</h4>
             <ul className="space-y-2 text-sm sm:text-base text-gray-400">
               <li>
-                  <a href="tel:+37062444062" className="hover:text-white transition-colors">
-                  +370 624 44 062
+                  <a href="tel:+37061881791" className="hover:text-white transition-colors">
+                  +370 618 81791
                 </a>
               </li>
               <li>
-                <a href="mailto:varikliosala@gmail.com" className="hover:text-white transition-colors break-all">
-                  varikliosala@gmail.com
+                <a href="mailto:autovaldika@gmail.com" className="hover:text-white transition-colors break-all">
+                  autovaldika@gmail.com
                 </a>
               </li>
-              <li>Kalno g. 83, Melekonių k, 14119 Melekonys</li>
+              <li>Jaunystės g. 11A, LT-02236 Vilnius</li>
             </ul>
           </div>
           <div>
@@ -47,7 +47,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="https://rekvizitai.vz.lt/imone/variklio_sala/" className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors">
+                <Link href="https://rekvizitai.vz.lt/imone/autovaldika_uab_autoservisas/" className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors">
                   Rekvizitai
                 </Link>
               </li>
@@ -56,7 +56,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-700 pt-6 sm:pt-8 text-center text-gray-400">
-          <p className="text-xs sm:text-sm">&copy; {currentYear} varikliosala.lt Visos teisės saugomos.</p>
+          <p className="text-xs sm:text-sm">&copy; {currentYear} autovaldika.lt Visos teisės saugomos.</p>
         </div>
       </div>
     </footer>

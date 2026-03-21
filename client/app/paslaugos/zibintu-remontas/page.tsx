@@ -57,7 +57,7 @@ export default function HeadlightRepairPage() {
               Kaip atliekamas žibintų reguliavimas?
              </h3>
               <p className="text-sm sm:text-base leading-relaxed">
-              Žibintai reguliuojami naudojant specializuotą įrangą, turinčią visus reikiamus sertifikatus. 
+             Autovaldika servise žibintai reguliuojami naudojant specializuotą įrangą, turinčią visus reikiamus sertifikatus. 
               Procedūra reikalauja ypatingo tikslumo, kad spindulys nukryptų tiksliai pagal gamintojo nustatytus parametrus.
               </p>
             </div>

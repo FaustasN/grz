@@ -44,27 +44,13 @@ export default function DiagnosticsPage() {
 
           <section className="mt-10 space-y-8 text-gray-700">
             <div className="space-y-3">
-              <p> Kompiuterinė automobilio diagnostika Pagiriuose – tai greitas ir tikslus būdas nustatyti
-            automobilio gedimus dar prieš jiems tampant rimtesnėmis problemomis. Mūsų servise
-            atliekame profesionalią variklio, elektronikos ir valdymo blokų diagnostiką, naudodami
-            modernią įrangą, kuri leidžia matyti realius automobilio sistemos parametrus.
-            Diagnostikos metu tikriname variklio darbą, klaidų kodus, kuro tiekimo sistemą, uždegimo
-            modulį, turbinos slėgį, oro srauto matuoklę, DPF būklę, ABS / ESP sistemas, klimato
-            kontrolę ir kitus svarbius parametrus. Reikšminga tai, kad ne tik perskaitome klaidas, bet ir
-            nustatome jų priežastis – tai dažnai padeda išvengti bereikalingų išlaidų arba netinkamų
-            detalių keitimo.</p>
+              <p> Kompiuterinė automobilio diagnostika Vaidotuose – tai greitas ir tikslus būdas nustatyti automobilio gedimus dar prieš jiems tampant rimtesnėmis problemomis. 
+                Mūsų servise atliekame profesionalią variklio, elektronikos ir valdymo blokų diagnostiką, naudodami modernią įrangą, kuri leidžia matyti realius automobilio sistemos parametrus. Diagnostikos metu tikriname variklio darbą, klaidų kodus, kuro tiekimo sistemą, uždegimo modulį, turbinos slėgį, oro srauto matuoklę, DPF būklę, ABS / ESP sistemas, klimato kontrolę ir kitus svarbius parametrus. Reikšminga tai, kad ne tik perskaitome klaidas, bet ir nustatome jų priežastis – tai dažnai padeda išvengti bereikalingų išlaidų arba netinkamų detalių keitimo.</p>
               <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">
               Kada būtina atlikti diagnostiką?
               </h2>
               <p className="text-sm sm:text-base leading-relaxed">
-              Jei užsidega „Check Engine“, automobilis trūkčioja, padidėja kuro sąnaudos, atsiranda
-              keistas kvapas, sumažėja trauka arba matote kitus elektronikos sutrikimus – diagnostika
-              leidžia suprasti tikrąją būklę. Pas mus diagnostika trunka vos 20–30 minučių, todėl klientai
-              dažnai ją renkasi net profilaktiškai.
-              Variklio Sala servise Pagiriuose gausite aiškų, suprantamą gedimų paaiškinimą ir
-              rekomendaciją, kaip juos pašalinti. Tikslumas, greitis ir ilgametė patirtis leidžia mums
-              diagnozuoti ir sudėtingiausius gedimus tiek naujesniuose, tiek senesniuose
-              automobiliuose.
+           Jei užsidega „Check Engine“, automobilis trūkčioja, padidėja kuro sąnaudos, atsiranda keistas kvapas, sumažėja trauka arba matote kitus elektronikos sutrikimus – diagnostika leidžia suprasti tikrąją būklę. Pas mus diagnostika trunka vos 20–30 minučių, todėl klientai dažnai ją renkasi net profilaktiškai. Autovaldika servise Vaidotuose gausite aiškų, suprantamą gedimų paaiškinimą ir rekomendaciją, kaip juos pašalinti. Tikslumas, greitis ir ilgametė patirtis leidžia mums diagnozuoti ir sudėtingiausius gedimus tiek naujesniuose, tiek senesniuose automobiliuose.
               </p>
             </div>
           </section>

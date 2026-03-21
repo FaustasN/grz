@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Darbų galerija | Automobilių servisas Pagiriuose",
+  title: "Darbų galerija | Automobilių servisas Vaidotuose - Autovaldika",
   description:
-    "Peržiūrėkite mūsų atliktų darbų nuotraukas - prieš ir po remonto. Visi darbai buvo atlikti Pagiriuose.",
+    "Peržiūrėkite mūsų atliktų darbų nuotraukas - prieš ir po remonto. Visi darbai buvo atlikti Vaidotuose.",
   keywords:
     "darbų galerija, remonto nuotraukos, automobilių remontas, prieš ir po, serviso darbai, darbų nuotraukos",
   robots: "index, follow",

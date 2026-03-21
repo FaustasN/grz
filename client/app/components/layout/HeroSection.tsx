@@ -22,7 +22,7 @@ export default function HeroSection() {
         <div className="absolute inset-0">
           <Image
             src="/hero-bg.webp"
-            alt="Variklio sala serviso fonas"
+            alt="autovaldika serviso fonas"
             fill
             priority
             className="object-cover"
@@ -31,10 +31,10 @@ export default function HeroSection() {
         </div>
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900/70 to-gray-800/60" />
 
-        <div className="container mx-auto max-w-6xl relative z-10">
+        <div className="container mx-auto max-w-6xl relative z-10">x
           <div className="text-center space-y-6 sm:space-y-8 animate-fade-in">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-lg px-2">
-            Automobilių servisas Pagiriuose - profesionalus remontas ir diagnostika
+            Automobilių servisas Vaidotuose - profesionalus remontas ir diagnostika
             </h1>
 
             <p className="text-lg sm:text-xl md:text-2xl text-gray-100 max-w-2xl mx-auto drop-shadow-md px-4">
@@ -52,16 +52,16 @@ export default function HeroSection() {
               </button>
 
               <a
-                href="tel:+37062444062"
+                href="tel:+370 618 81791"
                 className="flex items-center gap-2 sm:gap-3 bg-gray-800 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:bg-gray-700 transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl text-base sm:text-lg font-semibold w-full sm:w-auto justify-center"
               >
                 <Phone size={20} className="sm:hidden" />
                 <Phone size={24} className="hidden sm:block" />
-                <span className="text-sm sm:text-base">+370 624 44 062</span>
+                <span className="text-sm sm:text-base">+370 618 81791</span>
               </a>
 
               <Link
-                href="https://share.google/tNkISjYTxfFL8kkVR"
+                href="https://share.google/1HxNdD3qtbCYpSjGW"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-sm text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:bg-white/20 transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl text-base sm:text-lg font-semibold border border-white/30 w-full sm:w-auto justify-center"

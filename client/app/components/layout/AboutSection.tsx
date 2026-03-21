@@ -25,7 +25,7 @@ export default function AboutSection() {
     {
       icon: Hammer,
       title: 'Universalumas',
-      description: 'Perdegė automobilio lemputė – pakeisim. Neveikia stabdžiai – sutvarkysim. Reikia automobilio kėbulo remonto – suremontuosim.'
+      description: 'Autovaldika bendradarbiauja su kitomis automobilių remonto įmonėmis, taip suteikia galimybę savo klientams sutaupyti ir atgauti savo automobilį žymiai greičiau'
     }
   ];
 
@@ -38,7 +38,7 @@ export default function AboutSection() {
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-10 sm:mb-12 md:mb-16 scroll-animate">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-3 sm:mb-4">
-            Variklio sala - Jūsų automobilis, mūsų rūpestis
+            Autovaldika - Jūsų automobilis, mūsų rūpestis
           </h2>
         </div>
 

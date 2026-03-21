@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Straipsniai | Automobilių servisas Pagiriuose",
+  title: "Straipsniai | Automobilių servisas Vaidotuose - Autovaldika",
   description:
     "Naudingi straipsniai apie automobilių priežiūrą, remontą ir techninę diagnostiką. Patarimai iš profesionalų.",
   keywords:

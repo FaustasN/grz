@@ -260,7 +260,7 @@ function buildReminderEmailContent(reservation) {
         <p style="margin: 5px 0;"><strong>Telefonas:</strong> ${reservation.phone}</p>
       </div>
       <p>Prašome atvykti laiku!</p>
-      <p style="margin-top: 30px;">Su pagarba,<br>Variklio Sala</p>
+      <p style="margin-top: 30px;">Su pagarba,<br>Autovaldika</p>
     </div>
   `.trim();
 
@@ -276,7 +276,7 @@ function buildReminderEmailContent(reservation) {
     'Prašome atvykti laiku!',
     '',
     'Su pagarba,',
-    'Variklio Sala'
+    'Autovaldika'
   ].join('\n');
 
   return { html, text };
@@ -641,7 +641,7 @@ app.post('/api/reservations', async (req, res) => {
     
     transporter.sendMail({
       from: process.env.EMAIL_USER,
-      to: "varikliosala@gmail.com",
+      to: "autovaldika@gmail.com",
       subject: `Nauja rezervacija: ${service_type}`,
       text: `Nauja rezervacija:\n\nVardas: ${name}\nTelefonas: ${phone}\nData ir laikas: ${reservation_date}\nPaslauga: ${service_type}\nPapildoma informacija: ${additional_info || 'Nėra papildomos informacijos'}`
     }).catch(emailError => {
@@ -703,7 +703,7 @@ app.post('/api/reservations/contact', async (req, res) => {
   try {
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
-      to: "varikliosala@gmail.com",
+      to: "autovaldika@gmail.com",
       subject: `Nauja kontaktinė užklausa`,
       text: `Nauja kontaktinė užklausa:\n\nVardas: ${name}\nTelefonas: ${phone}`
     });

@@ -50,7 +50,7 @@ import { trackReservationButtonClick } from '../../components/utils/gtm';
               </h2>
               <p className="text-sm sm:text-base leading-relaxed">
               Stabdžių sistema yra viena svarbiausių automobilio saugumo dalių, todėl stabdžių
-              remontas Pagiriuose atliekamas itin kruopščiai ir profesionaliai. Keičiame stabdžių
+              remontas Vaidotuose atliekamas itin kruopščiai ir profesionaliai. Keičiame stabdžių
               kaladėles, diskus, būgnus, suportus, rankinio stabdžio trosus, stabdžių žarneles ir
               atliekame visos hidraulinės sistemos patikrą.
               </p>
@@ -65,7 +65,7 @@ import { trackReservationButtonClick } from '../../components/utils/gtm';
               lemputės skydelyje. Tai rimti požymiai, kurių ignoruoti nevalia.
               </p>
               <p className="text-sm sm:text-base leading-relaxed">
-              Stabdžių remontas Variklio Sala servise padeda užtikrinti, kad automobilis būtų saugus
+              Stabdžių remontas Autovaldika servise padeda užtikrinti, kad automobilis būtų saugus
               tiek mieste, tiek važiuojant didesniu greičiu. Nesvarbu, ar reikia pakeisti tik kaladėles, ar
               atlikti pilną sistemos tvarkymą – viskuo pasirūpinsime.
               </p>
