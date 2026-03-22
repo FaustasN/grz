@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   },
 };
 
+
 export default function RootLayout({
   children,
 }: {
@@ -22,8 +23,11 @@ export default function RootLayout({
 }) {
   return (
     <html>
+      <head>
+          <GoogleAnalytics gaId={'G-Z4ZLMNNRDF'} />
+         <GoogleTagManager gtmId={'GTM-KHZ67MT8'} /> 
+      </head>
       <body className="antialiased bg-white text-gray-900">{children}</body>
-     
     </html>
   );
 }

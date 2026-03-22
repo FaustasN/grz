@@ -21,7 +21,7 @@ export default function HeroSection() {
       <section className="relative pt-48 pb-20 px-4 overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/hero-bg.webp"
+            src="/herofoto.webp"
             alt="autovaldika serviso fonas"
             fill
             priority
