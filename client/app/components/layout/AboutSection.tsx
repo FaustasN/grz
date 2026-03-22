@@ -38,7 +38,7 @@ export default function AboutSection() {
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-10 sm:mb-12 md:mb-16 scroll-animate">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-3 sm:mb-4">
-            Autovaldika - Jūsų automobilis, mūsų rūpestis
+            Autovaldika - Avarijos rūpesčius palikite mums !
           </h2>
         </div>
 
