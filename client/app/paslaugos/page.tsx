@@ -16,7 +16,7 @@ export default function ServicesPage() {
       <Header />
       <main className="pt-40 pb-20 px-4 bg-gray-50" ref={containerRef as React.RefObject<HTMLElement>}>
         <h1 className="md:text-6xl font-bold text-gray-800 mb-8 sm:mb-10 text-center">
-          Visos autovaldika teikiamos paslaugos
+          Autovaldika autoserviso paslaugos Vaidotuose
         </h1>
       <div className="container mx-auto max-w-6xl">
       <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3">

@@ -7,6 +7,7 @@ export const metadata = buildMetadata({
     "Stabdžių remontas Vaidotuose: kaladėlių ir diskų keitimas, stabdžių sistemos patikra. Vairas vibruoja stabdant? Atvykite. Tel. +370 618 81791.",
   keywords:
     "stabdžių remontas Vaidotuose, stabdžių kaladėlių keitimas, stabdžių diskų keitimas",
+  image: "/brakerepair.webp",
 });
 
 export default function BrakeRepairLayout({

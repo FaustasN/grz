@@ -7,6 +7,7 @@ export const metadata = buildMetadata({
     "Tepalų (alyvos) ir filtrų keitimas Vaidotuose. Reguliarus alyvos keitimas saugo variklį nuo dėvėjimosi. Registruokitės tel. +370 618 81791.",
   keywords:
     "tepalų keitimas Vaidotuose, alyvos keitimas, variklio alyvos keitimas, filtrų keitimas",
+  image: "/oilchange.webp",
 });
 
 export default function OilChangeLayout({

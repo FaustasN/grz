@@ -174,7 +174,7 @@ export default function GalleryPageClient() {
                                       >
                                         <img
                                           src={`${API_BASE_URL}${photo.photo_url}`}
-                                          alt={group.caption || 'Before photo'}
+                                          alt={group.caption ? `${group.caption} – prieš remontą` : 'Automobilis prieš remontą'}
                                           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                                           onError={(e) => {
                                             (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100"%3E%3Crect width="100" height="100" fill="%23ddd"/%3E%3Ctext x="50" y="50" text-anchor="middle" dy=".3em" fill="%23999"%3EKlaida%3C/text%3E%3C/svg%3E';
@@ -203,7 +203,7 @@ export default function GalleryPageClient() {
                                       >
                                         <img
                                           src={`${API_BASE_URL}${photo.photo_url}`}
-                                          alt={group.caption || 'After photo'}
+                                          alt={group.caption ? `${group.caption} – po remonto` : 'Automobilis po remonto'}
                                           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                                           onError={(e) => {
                                             (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100"%3E%3Crect width="100" height="100" fill="%23ddd"/%3E%3Ctext x="50" y="50" text-anchor="middle" dy=".3em" fill="%23999"%3EKlaida%3C/text%3E%3C/svg%3E';
@@ -262,7 +262,7 @@ export default function GalleryPageClient() {
           </button>
           <img
             src={selectedPhoto}
-            alt="Enlarged photo"
+            alt="Padidinta darbo nuotrauka"
             className="max-w-full max-h-full object-contain rounded-lg"
             onClick={(e) => e.stopPropagation()}
           />
