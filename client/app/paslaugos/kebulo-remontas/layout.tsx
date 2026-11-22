@@ -7,6 +7,7 @@ export const metadata = buildMetadata({
     "Meninis įlenkimų lyginimas be dažymo ir kėbulo remontas Vaidotuose, Vilniuje. Išsaugomi gamykliniai dažai ir automobilio vertė. Tel. +370 618 81791.",
   keywords:
     "meninis lyginimas Vilnius, įlenkimų lyginimas be dažymo, kėbulo remontas Vaidotuose",
+  image: "/carbodyrepair.webp",
 });
 
 export default function BodyRepairLayout({

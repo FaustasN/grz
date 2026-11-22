@@ -31,7 +31,6 @@ export default function AboutSection() {
 
   return (
     <section
-      id="apie-mus"
       className="py-12 sm:py-16 md:py-20 px-4 bg-white scroll-mt-10"
       ref={containerRef as React.RefObject<HTMLElement>}
     >

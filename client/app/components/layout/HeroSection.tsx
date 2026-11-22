@@ -31,10 +31,10 @@ export default function HeroSection() {
         </div>
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900/70 to-gray-800/60" />
 
-        <div className="container mx-auto max-w-6xl relative z-10">x
+        <div className="container mx-auto max-w-6xl relative z-10">
           <div className="text-center space-y-6 sm:space-y-8 animate-fade-in">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-lg px-2">
-            Automobilių servisas Vaidotuose - profesionalus remontas ir diagnostika
+            Autoservisas Vaidotuose – profesionalus automobilių remontas ir diagnostika
             </h1>
 
             <p className="text-lg sm:text-xl md:text-2xl text-gray-100 max-w-2xl mx-auto drop-shadow-md px-4">

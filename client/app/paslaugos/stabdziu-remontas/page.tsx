@@ -37,7 +37,7 @@ import { trackReservationButtonClick } from '../../components/utils/gtm';
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/10" />
               <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 z-10">
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white drop-shadow-lg">
-                  Stabdžių remontas
+                  Stabdžių remontas Vaidotuose
                 </h1>
               </div>
             </div>

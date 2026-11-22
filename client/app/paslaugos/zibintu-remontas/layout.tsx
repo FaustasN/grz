@@ -7,6 +7,7 @@ export const metadata = buildMetadata({
     "Žibintų poliravimas, reguliavimas ir remontas Vaidotuose, Vilniuje. Geresnis matomumas tamsoje ir saugesnė kelionė. Tel. +370 618 81791.",
   keywords:
     "žibintų poliravimas Vilnius, žibintų reguliavimas, žibintų remontas Vaidotuose",
+  image: "/headlightsrepair.webp",
 });
 
 export default function HeadlightRepairLayout({

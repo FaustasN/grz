@@ -9,7 +9,6 @@ export default function ServicesSection() {
   const containerRef = useScrollAnimation();
   return (
     <section
-      id="paslaugos"
       className="py-12 sm:py-16 md:py-20 px-4 bg-gray-50 scroll-mt-32 sm:scroll-mt-36"
       ref={containerRef as React.RefObject<HTMLElement>}
     >

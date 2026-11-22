@@ -9,12 +9,14 @@ export function buildMetadata({
   description,
   keywords,
   noindex,
+  image = '/herofoto.webp',
 }: {
   path: string;
   title: string;
   description: string;
   keywords?: string;
   noindex?: boolean;
+  image?: string;
 }): Metadata {
   return {
     title,
@@ -29,6 +31,7 @@ export function buildMetadata({
       siteName: SITE_NAME,
       locale: 'lt_LT',
       type: 'website',
+      images: [{ url: image, alt: title }],
     },
   };
 }
