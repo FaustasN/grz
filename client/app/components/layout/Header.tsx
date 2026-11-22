@@ -12,7 +12,7 @@ export default function Header() {
           <Link href="/">
           <Image
               src="/transperent_logo.webp"
-              alt="TireService Logo"
+              alt="Autovaldika logotipas"
               width={150}
               height={150}
               priority

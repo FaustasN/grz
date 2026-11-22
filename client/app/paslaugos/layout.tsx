@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
+import { buildMetadata } from "../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Paslaugos | Automobilių servisas Vaidotuose - Autovaldika",
+export const metadata = buildMetadata({
+  path: "/paslaugos",
+  title: "Autoserviso paslaugos Vaidotuose | Autovaldika",
   description:
-    "Pilnas teikiamų paslaugų spektras jūsų automobiliui: diagnostika, stabdžių remontas, pakabos remontas, ratų suvedimas ir balansavimas, važiuoklės remontas, kėbulų remontas",
+    "Visos Autovaldika autoserviso paslaugos: diagnostika, tepalų keitimas, 3D ratų suvedimas, važiuoklės, stabdžių, kėbulo ir žibintų remontas Vaidotuose.",
   keywords:
-    "auto servisas, paslaugos, diagnostika, stabdžių remontas, ratų suvedimas, važiuoklės remontas, kėbulų remontas, tepalų keitimas, žibintų remontas,  remontas netoliese,  remontas Vaidotuose, žibintų poliravimas",
-  robots: "index, follow",
-};
+    "autoserviso paslaugos, automobilių remontas Vaidotuose, automobilių remontas Vilnius",
+});
 
 export default function ServicesLayout({
   children,

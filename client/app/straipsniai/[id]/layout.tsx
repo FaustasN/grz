@@ -1,28 +1,29 @@
 import type { Metadata } from "next";
 import { getArticleById } from "../articlesData";
+import { buildMetadata } from "../../lib/seo";
 
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const articleId = parseInt(params.id, 10);
+  const { id } = await params;
+  const articleId = parseInt(id, 10);
   const article = getArticleById(articleId);
 
   if (!article) {
     return {
-      title: "Straipsnis nerastas | Automobilių servisas Vaidotuose",
+      title: "Straipsnis nerastas | Autovaldika",
       description: "Atsiprašome, bet šis straipsnis neegzistuoja.",
       robots: "noindex, nofollow",
     };
   }
 
-  return {
-    title: `${article.title} | Automobilių servisas Vaidotuose`,
+  return buildMetadata({
+    path: `/straipsniai/${articleId}`,
+    title: `${article.title} | Autovaldika`,
     description: article.excerpt,
-    keywords: "automobilių straipsniai, priežiūros patarimai, remonto gidai",
-    robots: "index, follow",
-  };
+  });
 }
 
 export default function ArticleLayout({

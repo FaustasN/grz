@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
+import { buildMetadata } from "../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Stabdžių remontas | Automobilių servisas Vaidotuose - Autovaldika",
+export const metadata = buildMetadata({
+  path: "/paslaugos/stabdziu-remontas",
+  title: "Stabdžių remontas Vaidotuose – kaladėlės, diskai | Autovaldika",
   description:
-    "Stabdžiai yra vienas iš pagrindinių Jūsų automobilio saugumo elementų. Stabdymo kelias ilgėja arba vairas vibruoja stabdant.",
+    "Stabdžių remontas Vaidotuose: kaladėlių ir diskų keitimas, stabdžių sistemos patikra. Vairas vibruoja stabdant? Atvykite. Tel. +370 618 81791.",
   keywords:
-    "stabdžių remontas, stabdžių kaladėlių keitimas, stabdžių diskų keitimas, būgninių stabdžių remontas, ABS sistemos remontas, stabdžių remontas netoliese, stabdžių remontas Vaidotuose",
-  robots: "index, follow",
-};
+    "stabdžių remontas Vaidotuose, stabdžių kaladėlių keitimas, stabdžių diskų keitimas",
+});
 
 export default function BrakeRepairLayout({
   children,

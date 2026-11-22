@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
+import { buildMetadata } from "../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Važiuoklės remontas | Automobilių servisas Vaidotuose - Autovaldika",
+export const metadata = buildMetadata({
+  path: "/paslaugos/vaziuokles-remontas",
+  title: "Važiuoklės ir pakabos remontas Vaidotuose | Autovaldika",
   description:
-    "Važiuoklės remontas yra svarbus, nes jis gali pagerinti automobilio važiavimo kokybę ir sumažinti riziką kelionės metu.",
+    "Važiuoklės ir pakabos remontas Vaidotuose: amortizatorių, šarnyrų, traukių keitimas. Saugesnis ir patogesnis važiavimas. Tel. +370 618 81791.",
   keywords:
-    "važiuoklės remontas, pakabos remontas, amortizatorių keitimas, trauklių keitimas, šarnyrų keitimas, važiuoklės remontas netoliese, važiuoklės remontas Vaidotuose",
-  robots: "index, follow",
-};
+    "važiuoklės remontas Vaidotuose, pakabos remontas, amortizatorių keitimas, šarnyrų keitimas, traukių keitimas",
+});
 
 export default function SuspensionRepairLayout({
   children,

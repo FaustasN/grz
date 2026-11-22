@@ -32,7 +32,7 @@ export default function ContactSection() {
     {
       icon: Clock,
       label: 'Darbo laikas',
-      value: 'Pr-Sekm: 09:00-19:00',
+      value: 'Pr-Sekm: 09:00-18:00',
       href: null
     }
   ];
@@ -90,7 +90,7 @@ export default function ContactSection() {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               className="w-full h-full"
-              title="TireService vieta žemėlapyje"
+              title="Autovaldika vieta žemėlapyje"
             ></iframe>
           </div>
         </div>

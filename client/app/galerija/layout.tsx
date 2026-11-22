@@ -1,13 +1,11 @@
-import { Metadata } from "next";
+import { buildMetadata } from "../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Darbų galerija | Automobilių servisas Vaidotuose - Autovaldika",
+export const metadata = buildMetadata({
+  path: "/galerija",
+  title: "Darbų galerija – prieš ir po remonto | Autovaldika",
   description:
-    "Peržiūrėkite mūsų atliktų darbų nuotraukas - prieš ir po remonto. Visi darbai buvo atlikti Vaidotuose.",
-  keywords:
-    "darbų galerija, remonto nuotraukos, automobilių remontas, prieš ir po, serviso darbai, darbų nuotraukos",
-  robots: "index, follow",
-};
+    "Autovaldika atliktų darbų nuotraukos prieš ir po remonto. Visi darbai atlikti mūsų autoservise Vaidotuose.",
+});
 
 export default function GalleryLayout({
   children,
