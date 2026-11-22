@@ -1,6 +1,5 @@
 import { MetadataRoute } from 'next';
-
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://autovaldika.lt';
+import { SITE_URL as baseUrl } from './lib/seo';
 
 
 const staticRoutes: { path: string; priority: number; changefreq: MetadataRoute.Sitemap[0]['changeFrequency'] }[] = [

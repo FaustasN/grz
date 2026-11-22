@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
+import { buildMetadata } from "../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Kompiuterinė diagnostika | Automobilių servisas Vaidotuose - Autovaldika",
+export const metadata = buildMetadata({
+  path: "/paslaugos/diagnostika",
+  title: "Kompiuterinė automobilio diagnostika Vaidotuose | Autovaldika",
   description:
-    "Šiame puslapyje aprašoma apie kompiuterinės diagnostikos naudą automobilių diagnostikai",
+    "Kompiuterinė automobilio diagnostika Vaidotuose: nuskaitome klaidų kodus ir randame gedimo priežastį. Registruokitės tel. +370 618 81791.",
   keywords:
-    "kompiuterinė diagnostika, automobilių diagnostika, klaidų šalinimas, variklių diagnostika, variklio diagnostika netoliese, kompiuterinė diagnostika Vaidotuose",
-  robots: "index, follow",
-};
+    "kompiuterinė diagnostika, automobilio diagnostika Vaidotuose, variklio diagnostika, klaidų nuskaitymas",
+});
 
 export default function DiagnosticsLayout({
   children,

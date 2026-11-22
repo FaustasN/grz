@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
+import { buildMetadata } from "../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Žibintų remontas | Automobilių servisas Vaidotuose - Autovaldika",
+export const metadata = buildMetadata({
+  path: "/paslaugos/zibintu-remontas",
+  title: "Žibintų poliravimas ir reguliavimas Vilniuje | Autovaldika",
   description:
-    "Žibintų reguliavimas yra svarbus, nes jis gali pagerinti automobilio matomumą ir sumažinti riziką kelionės metu.",
+    "Žibintų poliravimas, reguliavimas ir remontas Vaidotuose, Vilniuje. Geresnis matomumas tamsoje ir saugesnė kelionė. Tel. +370 618 81791.",
   keywords:
-    "žibintų remontas, žibintų reguliavimas, priekinių žibintų remontas, žibintų keitimas, žibintų remontas netoliese, žibintų remontas Vaidotuose, žibintų poliravimas",
-  robots: "index, follow",
-};
+    "žibintų poliravimas Vilnius, žibintų reguliavimas, žibintų remontas Vaidotuose",
+});
 
 export default function HeadlightRepairLayout({
   children,

@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
+import { buildMetadata } from "../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Straipsniai | Automobilių servisas Vaidotuose - Autovaldika",
+export const metadata = buildMetadata({
+  path: "/straipsniai",
+  title: "Straipsniai apie automobilių priežiūrą | Autovaldika",
   description:
-    "Naudingi straipsniai apie automobilių priežiūrą, remontą ir techninę diagnostiką. Patarimai iš profesionalų.",
-  keywords:
-    "automobilių straipsniai, priežiūros patarimai, remonto gidai, automobilių diagnostika",
-  robots: "index, follow",
-};
+    "Patarimai apie automobilio priežiūrą, remontą ir diagnostiką iš Autovaldika meistrų.",
+  // noindex while articlesData is empty; remove when the first article is published
+  noindex: true,
+});
 
 export default function ArticlesLayout({
   children,

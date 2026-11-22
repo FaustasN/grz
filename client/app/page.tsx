@@ -6,6 +6,17 @@ import Footer from './components/layout/Footer';
 import ContactSection from './components/layout/ContactSection';
 import PrivacyPolicy from './components/forms/PrivacyPolicy';
 import ScrollToTop from './components/ui/ScrollToTop';
+import { buildMetadata } from './lib/seo';
+
+export const metadata = buildMetadata({
+  path: '/',
+  title: 'Autoservisas Vaidotuose, Vilniuje | Autovaldika',
+  description:
+    'Autoservisas Vaidotuose: kompiuterinė diagnostika, tepalų keitimas, 3D ratų suvedimas, važiuoklės, stabdžių ir kėbulo remontas. Skambinkite +370 618 81791.',
+  keywords:
+    'autoservisas Vaidotuose, automobilių servisas Vaidotai, auto servisas Vilnius, automobilių remontas, Autovaldika',
+});
+
 export default async function HomePage() {
   return (
     <>

@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
+import { buildMetadata } from "../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "3D ratų suvedimas | Automobilių servisas Vaidotuose - Autovaldika",
+export const metadata = buildMetadata({
+  path: "/paslaugos/3d-ratu-suvedimas",
+  title: "3D ratų suvedimas Vilniuje, Vaidotuose | Autovaldika",
   description:
-    "Šiame puslapyje aprašoma 3D ratų suvedimo paslauga, kuri atliekama su modernia įranga, kuri leidžia tiksliai sureguliuoti ratų geometriją pagal gamintojo parametrus.",
+    "3D ratų suvedimas Vaidotuose, Vilniuje: ratų geometrija reguliuojama modernia įranga pagal gamintojo parametrus. Tel. +370 618 81791.",
   keywords:
-    "3D ratų suvedimas, ratų balansavimas, padangų keitimas, vairo traukės keitimas, ratų geometrija, ratų suvedimas netoliese, ratų suvedimas Vaidotuose",
-  robots: "index, follow",
-};
+    "3D ratų suvedimas Vilnius, ratų suvedimas Vaidotuose, ratų geometrija, ratų geometrijos reguliavimas",
+});
 
 export default function WheelAlignmentLayout({
   children,
